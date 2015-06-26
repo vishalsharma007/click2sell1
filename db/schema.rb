@@ -11,15 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150624171859) do
+ActiveRecord::Schema.define(version: 20150626111733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "Pictures_tags", id: false, force: :cascade do |t|
-    t.integer "picture_id"
-    t.integer "tag_id"
-  end
 
   create_table "albums", force: :cascade do |t|
     t.string   "Name"
@@ -37,6 +32,14 @@ ActiveRecord::Schema.define(version: 20150624171859) do
     t.datetime "photo_updated_at"
     t.integer  "album_id"
   end
+
+  create_table "pictures_tags", id: false, force: :cascade do |t|
+    t.integer "picture_id"
+    t.integer "tag_id"
+  end
+
+  add_index "pictures_tags", ["picture_id", "tag_id"], name: "index_pictures_tags_on_picture_id_and_tag_id", using: :btree
+  add_index "pictures_tags", ["tag_id"], name: "index_pictures_tags_on_tag_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
