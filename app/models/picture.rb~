@@ -1,0 +1,16 @@
+class Picture < ActiveRecord::Base
+belongs_to :album
+
+
+has_attached_file :photo,
+:url => "/assets/images",
+:path=> ":rails_root/public/assets/images/:id/:style/:basename.:extension",
+
+:styles => { 
+
+:thumb => '100x100>',:small => "150x150>", :large => "320x240>" }
+
+validates_attachment_presence :photo
+validates_attachment_size :photo, :less_than => 5.megabytes
+
+end

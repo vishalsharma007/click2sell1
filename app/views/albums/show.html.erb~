@@ -1,0 +1,16 @@
+<p>
+<strong>Name:</strong>
+<%= @album.Name %>
+</p>
+
+<p>
+<strong>Description:</strong>
+<%=@album.Description %>
+</p>
+<p>
+ <strong>Photo:</strong>
+<%= image_tag @album.pictures(:thumb) %>
+</p>
+
+<%= link_to 'Back',new_album_path %>
+

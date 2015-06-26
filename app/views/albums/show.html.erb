@@ -1,0 +1,43 @@
+
+
+<font size ="4">
+<div style="float:left; padding:20px" >
+ <div class="control-group">
+<p>
+<strong>Name:</strong>
+
+<%= @album.Name %>
+</p>
+
+<p>
+<strong>Description:</strong>
+
+<%=@album.Description %>
+</p>
+
+</div>
+
+<p>
+ <strong>Photos:</strong>
+ </p>
+
+<%@album.pictures.each do |f| %>
+
+ <%= image_tag f.photo.url(:thumb) %>
+
+    <% f.tags.each do |p| %>
+
+<strong>Tags:</strong>
+
+    <%= p.name %>
+         
+    <% end%>
+    
+
+<%end%>
+<p><br><br>
+<%= link_to 'Show All Albums',albums_path,:class => 'btn btn-info' %>
+</br>
+</br>
+</p>
+</font>

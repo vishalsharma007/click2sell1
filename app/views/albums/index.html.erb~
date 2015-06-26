@@ -1,0 +1,20 @@
+<h2>Listing Album<h2>
+
+
+
+<table>
+  <tr>
+   <th>Name</th>
+   <th>Description</th>
+   
+  <tr>
+
+<% @album.each do |album| %>
+  <tr>
+    <td><%=album.Name %></td>
+    <td><%=album.Description %></td>
+     <td><%= image_tag @album.pictures.url(:large) %></td>
+   
+   </tr>
+<% end %>
+</table>

@@ -1,0 +1,47 @@
+
+<font size ="2">
+
+
+
+<h2>Listing Albums<h2>
+<div class="container"> 
+
+<table class="table table-bordered ">
+ 
+ <tr>  
+  <th>NAME</th>
+   <th>DESCRIPTION</th>
+   <th>PHOTOS</th>
+   <th colspan="2">ACTIONS</th>
+  </tr>
+
+
+
+
+<tr>
+
+<% @album.each do |album| %>
+  
+   <th> <%=album.Name %></th>
+
+    <th><%=album.Description %></th>  
+   
+   <th><% album.pictures.each do |f| %>
+     <%=image_tag f.photo.url(:thumb) %>
+      <%f.tags.each do |p| %>
+        <%=p.name %>
+     <%end%> 
+     <%end%>
+    </th>
+      
+
+   <th><%=link_to 'Delete',album_path(album),:class=>'btn btn-danger',method: :delete,
+             data: {confirm: 'Are you sure ?'} %></th>
+    <th><%= link_to 'Edit',edit_album_path(album),:class => 'btn btn-info' %></th>
+    </tr>
+   
+<% end %>
+ </table>
+
+</font>
+ </div>

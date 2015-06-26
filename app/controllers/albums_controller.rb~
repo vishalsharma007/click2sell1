@@ -1,0 +1,35 @@
+class AlbumsController < ApplicationController
+
+ def index
+@album= Album.all
+ end
+
+ def new
+    @album= Album.new
+  # 3.times do  @album.pictures.build}
+ end
+
+ def create
+debugger
+   @album=Album.new(album_params)
+
+   if @album.save
+   redirect_to @album
+   else
+     render :action=> 'new'
+  end
+end
+  
+
+  def show 
+  @album=Album.find(params[:id])
+ end
+
+
+ private
+             def album_params
+               params.require(:album).permit(:Name,:Description,
+       picture_attributes: [:photo])
+      end
+
+end

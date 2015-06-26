@@ -1,0 +1,32 @@
+<%= form_for @album,:html =>{:class =>'form-horizontal',multipart:true} do |f| %>
+
+ <div class="control-group">
+    <%= f.label :Name ,:class=>'control-label'%>
+<div class="controls">
+    <%= f.text_field :Name, :class=>'text_field' %>
+  </div>
+</div>
+<p>
+ <div class="control-group">
+    <%= f.label :Description, :class=>'control-label'%>
+ <div class="controls">
+    <%= f.text_area :Description, :class=>'text_field' %>
+  </div>
+  </div>
+</p>
+<p>
+<div class="control-group">
+<%= f.label :photo %>
+<%= f.file_field :photo %>
+ </p>
+
+<p>
+<% link_to 'Add photo',albums_path%></p>
+   
+</div>
+ 
+  <div class="form-actions">
+    <%= f.submit nil,:class=> 'btn btn-primary' %>
+    <%=link_to 'cancel',albums_path, :class=>'btn btn-mini'%>
+</div>
+<%end%>
