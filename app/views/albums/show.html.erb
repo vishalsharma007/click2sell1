@@ -21,20 +21,25 @@
  <strong>Photos:</strong>
  </p>
 
-<%@album.pictures.each do |f| %>
+<div class="row">
 
- <%= image_tag f.photo.url(:thumb) %>
+  <div class="col-sm-6 col-sm-3">
 
-    <% f.tags.each do |p| %>
+   <a href="#" class="thumbnail">
 
-<strong>Tags:</strong>
+      <%@album.pictures.each do |f| %>
+ 
+         <%= image_tag f.photo.url %>
+           <% f.tags.each do |p| %>    
+           <h4>Tags:</h4>             
+               <%= p.name %>   
+               <% end%>
+              <%end%> 
+                  </a>   
+       </div>
+   </div>
+   
 
-    <%= p.name %>
-         
-    <% end%>
-    
-
-<%end%>
 <p><br><br>
 <%= link_to 'Show All Albums',albums_path,:class => 'btn btn-info' %>
 </br>

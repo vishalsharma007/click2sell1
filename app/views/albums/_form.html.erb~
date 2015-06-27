@@ -1,6 +1,8 @@
 <%= form_for @album,:html =>{:class =>'form-horizontal',multipart:true} do |f| %>
-
+<font size ="2">
+<div class="container" >
  <div class="control-group">
+
     <%= f.label :Name ,:class=>'control-label'%>
 <div class="controls">
     <%= f.text_field :Name, :class=>'text_field' %>
@@ -12,21 +14,38 @@
  <div class="controls">
     <%= f.text_area :Description, :class=>'text_field' %>
   </div>
-  </div>
+ </div> 
 </p>
-<p>
-<div class="control-group">
-<%= f.label :photo %>
-<%= f.file_field :photo %>
- </p>
 
 <p>
-<% link_to 'Add photo',albums_path%></p>
+<%= f.fields_for :pictures do |build|%>
+<div class="control-group">
+
+<%= build.label :Photo %>
+<%= build.file_field :photo %>
+  
+  </div>
+ 
+  <%=build.fields_for :tags do |p|%>
+      <div class="control-group">
+      <%=p.label :Tag%>
+      <%= p.text_field :name%>
+      </div>
+
+      </p>
+
+<%end%>
+
+<%end%>
+
    
-</div>
+
  
   <div class="form-actions">
     <%= f.submit nil,:class=> 'btn btn-primary' %>
-    <%=link_to 'cancel',albums_path, :class=>'btn btn-mini'%>
+    <%=link_to 'cancel',new_user_path, :class=>'btn btn-mini'%>
 </div>
+</font>
+</div>
+
 <%end%>
