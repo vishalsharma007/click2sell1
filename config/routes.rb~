@@ -7,9 +7,8 @@ get "sign_out" => "devise/session#destroy"
 end
 
 resources :users 
- resources :albums do
+ resources :albums
   resources :pictures
-end
 
  root "albums#index"
 

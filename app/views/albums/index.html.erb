@@ -34,10 +34,15 @@
      <%end%>
     </th>
       
-
+   <% if can? :destroy,Album %>
    <th><%=link_to 'Delete',album_path(album),:class=>'btn btn-danger',method: :delete,
              data: {confirm: 'Are you sure ?'} %></th>
+    <%end%>
+
+    <%if can? :update,Album %>
     <th><%= link_to 'Edit',edit_album_path(album),:class => 'btn btn-info' %></th>
+    <%end%>
+
     </tr>
    
 <% end %>

@@ -52,7 +52,9 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to "User", "/path1"  %></li>
+            <%if can? :create,Album %>
             <li><%= link_to "New Album", new_album_path  %></li>
+            <%end%>
             <li><%= link_to "Sign Out", destroy_user_session_path ,method: :delete %></li>
            </ul>
            <div class="pull-right">

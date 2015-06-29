@@ -1,4 +1,5 @@
 class AlbumsController < ApplicationController
+  load_and_authorize_resource
 
   def index
   
@@ -17,9 +18,9 @@ class AlbumsController < ApplicationController
  end
 
  def create
-
+debugger
    @album=Album.create(album_params)
-
+   @album.user_id = current_user.id
    if @album.save
     flash[:notice]="Successfully created album"
     redirect_to @album
@@ -39,6 +40,7 @@ end
 
     def update
          @album=Album.find(params[:id])
+         
                if @album.update(album_params)
                  redirect_to album_path(@album)
                else 
@@ -49,9 +51,11 @@ end
   def destroy
     
     @album = Album.find(params[:id])
+
     @album.destroy
 
     redirect_to albums_path
+
   end
  private
              def album_params
