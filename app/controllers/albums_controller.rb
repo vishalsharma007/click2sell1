@@ -18,7 +18,7 @@ class AlbumsController < ApplicationController
  end
 
  def create
-debugger
+
    @album=Album.create(album_params)
    @album.user_id = current_user.id
    if @album.save

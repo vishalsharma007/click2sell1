@@ -5,23 +5,35 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
      has_many :albums
-   
+
+     validates :Firstname,:Lastname, presence: true
+
+   before_create :set_fullname
+
+  def set_fullname
+ 
+    self.Fullname = self.Firstname self.Lastname
+  end
 
 
 
-      ROLES = %w[admin moderator author banned]
+         ROLES = %w[admin moderator author banned]
 
-def roles=(roles)
-	self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r)}.inject(0,:+)
-end
+	def roles=(roles)
+		self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r)}.inject(0,:+)
+	end
 
-def roles
-	ROLES.reject do |r|
-		((roles_mask.to_i||0)& 2**ROLES.index(r)).zero?
+	def roles
+		ROLES.reject do |r|
+			((roles_mask.to_i||0)& 2**ROLES.index(r)).zero?
 	end
 end
 
-def is?(role)
-  roles.include?(role.to_s)
-end
+	def is?(role)
+ 	 roles.include?(role.to_s)
+	end
+
+
+
+
 end
