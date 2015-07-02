@@ -1,6 +1,9 @@
+
+<%= javascript_include_tag "application.js" %>
 <%= form_for @album,:html =>{:class =>'form-horizontal',multipart:true} do |f| %>
+
 <font size ="2">
-<div class="container" >
+<div style="margin-left:10px">
  <div class="control-group">
 
     <%= f.label :Name ,:class=>'control-label'%>
@@ -15,39 +18,70 @@
     <%= f.text_area :Description, :class=>'text_field' %>
   </div>
  </div> 
- 
+ </p>
 
-</p>
+<%if @album.new_record? %>
 
-<p>
-<%= f.fields_for :pictures do |build|%>
-<div class="control-group">
-
-<%= build.label :Photo %>
-<%= build.file_field :photo %>
+  <%= f.fields_for :pictures do |build|%>
+    <div class="control-group">
+    
+        <%= build.label :Photo %>
+         <div id="file_fields_wrap">
+        <%= build.file_field :photo %>
+    
+ <br/ >
   
-  </div>
- 
-  <%=build.fields_for :tags do |p|%>
-      <div class="control-group">
-      <%=p.label :Tag%>
-      <%= p.text_field :name%>
-      </div>
-
-      </p>
-
-<%end%>
-
-<%end%>
-
+      <%=build.fields_for :tags do |p|%>
+        <div class="control-group">
+        <%=p.label :Tag%>
+        <%= p.text_field :name%>
+        </div>
+        </div>
+        <%end%>
+      <%end%><br/>
    
+  <%else%>
+
+  
+    <p>
+    <strong>Photos:</strong>
+ </p>
+
+<div class="row">
+
+  <div class="col-sm-4 col-sm-2">
+
+   <a href="#" class="img-rounded">
+
+      <%@album.pictures.each do |q| %>
+
+    <%= image_tag q.photo.url(:thumb) %>
+    <%= link_to "Delete",picture_path(q),method: :delete, data: { confirm: "Are you sure?" } %>
+ </a>  
 
  
-  <div class="form-actions">
-    <%= f.submit nil,:class=> 'btn btn-primary' %>
-    <%=link_to 'cancel',new_user_path, :class=>'btn btn-mini'%>
+      <% q.tags.each do |p| %>    
+      <h4><span class="label label-success">Tags</span> </h4>          
+        <%= p.name %>  
+          
+        <% end%>
+     <%end%> 
+     </div>
+ </div>
+ <%end%><br/><br />
+
+<p> 
+ <button type="button" id= "add_field_button" class="btn btn-primary">Add More Photos</button>
+ </p><br/>
+ </div>
+  <p>
+    <div class="form-actions">
+    <%= f.submit nil, :class=> 'btn btn-primary' %>
+    <%=link_to 'cancel',albums_path, :class=>'btn btn-mini'%>
+    </div>
+  </p>
+
+
 </div>
 </font>
-</div>
-
 <%end%>

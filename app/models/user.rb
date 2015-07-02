@@ -6,13 +6,13 @@ class User < ActiveRecord::Base
 
      has_many :albums
 
-     validates :Firstname,:Lastname, presence: true
+     validates :firstname,:lastname, presence: true
 
    before_create :set_fullname
 
   def set_fullname
  
-    self.Fullname = self.Firstname self.Lastname
+    self.fullname = self.firstname self.lastname
   end
 
 

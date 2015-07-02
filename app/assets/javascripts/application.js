@@ -15,3 +15,20 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+
+
+
+
+$(document).ready(function()
+{ var no=0;
+      $("#add_field_button").unbind('click').click( function()
+           { ++no;
+    	
+              $("#file_fields_wrap").append($('<input type="file" name="album[pictures_attributes]['+no+'][photo]" id="album_pictures_attributes_'+no+'_photo"><br/><br/><label for="album_pictures_attributes_0_tags_attributes_0_Tag">Tag</label><input type="text" name="album[pictures_attributes]['+no+'][tags_attributes]['+no+'][name]" id="album_pictures_attributes_'+no+'_tags_attributes_'+no+'_name">'))
+
+              	
+          }
+
+      );
+});

@@ -4,7 +4,8 @@
 
 
 <h2>Listing Albums<h2>
-<div class="container"> 
+<div class="container">
+
 
 <table class="table table-bordered ">
  
@@ -13,11 +14,7 @@
    <th>DESCRIPTION</th>
    <th>PHOTOS</th>
    <th colspan="2">ACTIONS</th>
-  </tr>
-
-
-
-
+     </tr>
 <tr>
 
 <% @album.each do |album| %>
@@ -42,13 +39,14 @@
     <%if can? :update,Album %>
     <th><%= link_to 'Edit',edit_album_path(album),:class => 'btn btn-info' %></th>
     <%end%>
-
     </tr>
    
 <% end %>
  </table>
  </div>
  </font>
+<div class="pull-right">
+<%= link_to 'Create New Album',new_album_path,:class => 'btn btn-info' %></div> 
 <nav>
   <ul class="pagination pagination-sm">
     <li>

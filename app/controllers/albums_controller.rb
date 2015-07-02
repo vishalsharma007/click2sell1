@@ -10,21 +10,18 @@ class AlbumsController < ApplicationController
     @album= Album.new
     @photo= @album.pictures.new
     @tag = @photo.tags.new
-   3.times do  
-        @album.pictures.build
-        
-
+    
   end
- end
 
  def create
-
+  
    @album=Album.create(album_params)
    @album.user_id = current_user.id
    if @album.save
     flash[:notice]="Successfully created album"
-    redirect_to @album
-   else
+      redirect_to album_path(@album)
+
+    else
      render :action=> 'new'
   end
 end
