@@ -9,15 +9,16 @@
 <body>
  <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-    <div class="pull-left">
+    
      <% if user_signed_in? %>
-       <div style="float:right">
+       <div class="pull-right">
         <%= current_user.email %><br/>
-         <div style="float:right;padding:20px" > 
+        
           <%= link_to 'Sign out', destroy_user_session_path, method: :delete%></div>
-         </div>
+         
 
          <% else %>
+         <div class="pull-left">
             <%= link_to 'Register',new_user_registration_path,:class=>'btn btn-info'%> <%= link_to 'Sign in', new_user_session_path,:class=>'btn btn-info'  %>
          
             </div> 

@@ -1,9 +1,11 @@
 class AlbumsController < ApplicationController
   load_and_authorize_resource
-
-  def index
   
-     @album= Album.all
+  def index
+ 
+  @album= Album.paginate(:page=>params[:page],:per_page=> 5)
+
+
   end
 
  def new

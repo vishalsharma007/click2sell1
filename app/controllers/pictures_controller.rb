@@ -1,10 +1,6 @@
 class PicturesController < ApplicationController
    
-    
-
-   
-
-	def destroy
+    def destroy
 		@photo = Picture.find(params[:id])
 			
 		if @photo.destroy

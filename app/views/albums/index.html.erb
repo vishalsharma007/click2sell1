@@ -1,21 +1,18 @@
 
+
 <font size ="2">
-
-
 
 <h2>Listing Albums<h2>
 <div class="container">
-
-
 <table class="table table-bordered ">
- 
+
  <tr>  
   <th>NAME</th>
    <th>DESCRIPTION</th>
    <th>PHOTOS</th>
    <th colspan="2">ACTIONS</th>
      </tr>
-<tr>
+
 
 <% @album.each do |album| %>
   
@@ -43,10 +40,15 @@
    
 <% end %>
  </table>
+ 
  </div>
  </font>
+ <font size="4">
+ <%=will_paginate @album %>
+ </font>
 <div class="pull-right">
-<%= link_to 'Create New Album',new_album_path,:class => 'btn btn-info' %></div> 
+<%= link_to 'Create New Album',new_album_path,:class => 'btn btn-primary' %></div> 
+
 <nav>
   <ul class="pagination pagination-sm">
     <li>
@@ -66,7 +68,6 @@
     </li>
   </ul>
 </nav>
-
 
 
 

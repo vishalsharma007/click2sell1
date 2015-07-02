@@ -20,60 +20,39 @@
  </div> 
  </p>
 
-<%if @album.new_record? %>
+<strong>Photos:</strong>
+<div class="container">
+<div class="row">
+  <div class="col-sm-10">
+     <%@album.pictures.each do |q| %>
+      <%= image_tag q.photo.url(:thumb) %>
+      
+       <% q.tags.each do |p| %>    
+         <%= p.name %>  
+         <% end%>
+       <%end%> 
+    </div> 
+   </div> 
 
-  <%= f.fields_for :pictures do |build|%>
+ <%= f.fields_for :pictures,@album.pictures.build do |t|%>
+ <p>
     <div class="control-group">
-    
-        <%= build.label :Photo %>
-         <div id="file_fields_wrap">
-        <%= build.file_field :photo %>
-    
- <br/ >
-  
-      <%=build.fields_for :tags do |p|%>
-        <div class="control-group">
+      <div id="file_fields_wrap">
+        <%= t.file_field :photo %>
+         
+         <%=t.fields_for :tags do |p|%>
         <%=p.label :Tag%>
         <%= p.text_field :name%>
-        </div>
-        </div>
-        <%end%>
-      <%end%><br/>
-   
-  <%else%>
-
   
-    <p>
-    <strong>Photos:</strong>
- </p>
+        </div>
+        <%end%>      
+      <%end%> 
+      </div> 
+      </p>
 
-<div class="row">
+      <br/>
+ <button type="button" id= "add_field_button" class="btn btn-success">Add More Photos</button>
 
-  <div class="col-sm-4 col-sm-2">
-
-   <a href="#" class="img-rounded">
-
-      <%@album.pictures.each do |q| %>
-
-    <%= image_tag q.photo.url(:thumb) %>
-    <%= link_to "Delete",picture_path(q),method: :delete, data: { confirm: "Are you sure?" } %>
- </a>  
-
- 
-      <% q.tags.each do |p| %>    
-      <h4><span class="label label-success">Tags</span> </h4>          
-        <%= p.name %>  
-          
-        <% end%>
-     <%end%> 
-     </div>
- </div>
- <%end%><br/><br />
-
-<p> 
- <button type="button" id= "add_field_button" class="btn btn-primary">Add More Photos</button>
- </p><br/>
- </div>
   <p>
     <div class="form-actions">
     <%= f.submit nil, :class=> 'btn btn-primary' %>
@@ -85,3 +64,4 @@
 </div>
 </font>
 <%end%>
+</div>
