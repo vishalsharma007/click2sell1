@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   def set_fullname
  
-    self.fullname = self.firstname self.lastname
+    fullname = "#{firstname} #{lastname}"
   end
 
 
