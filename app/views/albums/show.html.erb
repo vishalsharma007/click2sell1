@@ -19,15 +19,13 @@
  <strong>Photos:</strong>
  </p>
 
+<div class="container">
 <div class="row">
-
-  <div class="col-sm-6 col-sm-3">
-
-   <a href="#" class="thumbnail">
+  <div class="col-sm-10">
 
       <%@album.pictures.each do |f| %>
  
-         <%= image_tag f.photo.url %>
+         <%= image_tag f.photo.url(:thumb) %>
            <% f.tags.each do |p| %>    
            <h4>Tags:</h4>             
                <%= p.name %>   

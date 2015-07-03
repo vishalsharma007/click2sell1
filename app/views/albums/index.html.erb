@@ -4,9 +4,9 @@
 
 <h2>Listing Albums<h2>
 <div class="container">
-<table class="table table-bordered ">
+<table class="table table-bordered">
 
- <tr>  
+ <tr class="primary">  
   <th>NAME</th>
    <th>DESCRIPTION</th>
    <th>PHOTOS</th>
@@ -15,7 +15,7 @@
 
 
 <% @album.each do |album| %>
-  
+  <tr class="danger1">
    <th> <%=album.Name %></th>
 
     <th><%=album.Description %></th>  
