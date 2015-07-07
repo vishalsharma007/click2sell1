@@ -1,0 +1,17 @@
+<strong>Associated Photos:</strong>
+<div class="container">
+<div class="row">
+  <div class="col-sm-10">
+ 
+  <% @photo.each do |f|%>
+ 
+  <%f.pictures.each do |q|%>
+   <%=image_tag q.photo.url(:thumb), :class=>"img-thumbnail"%>
+
+   	<%end%>
+  	<%end%>
+
+  	</div>
+  </div>
+</div>
+

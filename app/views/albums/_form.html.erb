@@ -5,7 +5,9 @@
 <font size ="2">
 <div style="margin-left:10px">
  <div class="control-group">
-
+ <div class="pull-right">
+  <%= link_to "Back To Gallery",new_user_path,:class=> 'btn btn-info' %>
+ </div>
     <%= f.label :Name ,:class=>'control-label'%>
 <div class="controls">
     <%= f.text_field :Name, :class=>'text_field' %>
@@ -20,21 +22,43 @@
  </div> 
  </p>
 
+<% if @album.new_record? %>
+<%= f.fields_for :pictures do |t|%>
+ <p>
+    <div class="control-group">
+      <div id="file_fields_wrap">
+        <%= t.file_field :photo %>
+         
+         <%=t.fields_for :tags do |p|%>
+        <%=p.label :Tag %>
+        <%= p.text_field :name%>
+      </div>
+     <%end%>      
+    <%end%> 
+  </div> 
+</p>
+<br/>
+
+  <%else%>
+      
 <strong>Photos:</strong>
 <div class="container">
 <div class="row">
   <div class="col-sm-10">
      <%@album.pictures.each do |q| %>
-      <%= image_tag q.photo.url(:thumb) %>
-      
-       <% q.tags.each do |p| %>    
-         <%= p.name %>  
-         <% end%>
-       <%end%> 
+      <%= image_tag q.photo.url(:thumb), :class=>"img-thumbnail" %>
+            
+        <% q.tags.each do |p| %>    
+          
+        <% p.name.split(',').each do |tag| %>
+        <%=link_to (tag),pictures_path({:name => tag})%>
+        <%end%> 
+        <% end%>
+        <br/><%=link_to 'Delete',picture_path(q),method: :delete, data: {confirm: 'Are you sure ?'} %><br />
+        <%end%> 
     </div> 
    </div> 
-
- <%= f.fields_for :pictures,@album.pictures.build do |t|%>
+   <%= f.fields_for :pictures,@album.pictures.build do |t|%>
  <p>
     <div class="control-group">
       <div id="file_fields_wrap">
@@ -42,15 +66,16 @@
          
          <%=t.fields_for :tags do |p|%>
         <%=p.label :Tag%>
-        <%= p.text_field :name%>
+        <%= p.text_field :all_tags%>
   
         </div>
-        <%end%>      
-      <%end%> 
-      </div> 
-      </p>
-
-      <br/>
+      <%end%>      
+    <%end%> 
+   </div> 
+  </p>
+<br/>
+<%end%>
+ 
  <button type="button" id= "add_field_button" class="btn btn-success">Add More Photos</button>
 
   <p>
@@ -59,7 +84,6 @@
     <%=link_to 'cancel',albums_path, :class=>'btn btn-mini'%>
     </div>
   </p>
-
 
 </div>
 </font>

@@ -56,8 +56,9 @@ end
     redirect_to albums_path
 
   end
- private
-             def album_params
+
+  private
+         def album_params
                params.require(:album).permit(:Name,:Description,
        pictures_attributes: [:photo,tags_attributes: [:name]])
       end

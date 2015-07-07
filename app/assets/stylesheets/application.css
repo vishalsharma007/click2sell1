@@ -12,9 +12,15 @@
  *
  *= require_tree .
  *= require_self
+ 
+ */
 
- */.danger1{
+
+  .danger1{
   background-color: #ffffff !important;
+}
+	.back{
+  background-color: #FF944D !important;
 }
 
 

@@ -10,6 +10,7 @@ resources :users
  resources :albums
   resources :pictures
 
+
  root "albums#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
