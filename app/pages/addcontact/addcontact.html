@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add Contact</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="login-page">
+
+  <ion-list>
+    <form #contactForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating primary>First name</ion-label>
+        <ion-input [(ngModel)]="contact.firstname" ngControl="firstname" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>Last name</ion-label>
+        <ion-input [(ngModel)]="contact.lastname" ngControl="lastname" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>Company</ion-label>
+        <ion-input [(ngModel)]="contact.company" ngControl="company" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>Email</ion-label>
+        <ion-input [(ngModel)]="contact.email" ngControl="email" type="text" #email="ngForm" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="email.valid || submitted == false" danger padding-left>
+        Email is required
+      </p>
+      <ion-item>
+        <ion-label floating primary>Title</ion-label>
+        <ion-input [(ngModel)]="contact.title" ngControl="title" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>Address 1</ion-label>
+        <ion-input [(ngModel)]="contact.address1" ngControl="address1" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>Address 2</ion-label>
+        <ion-input [(ngModel)]="contact.address2" ngControl="address2" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>City</ion-label>
+        <ion-input [(ngModel)]="contact.city" ngControl="city" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>State</ion-label>
+        <ion-input [(ngModel)]="contact.state" ngControl="state" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>Phone</ion-label>
+        <ion-input [(ngModel)]="contact.phone" ngControl="phone" type="text">
+        </ion-input>
+      </ion-item>
+      <div padding>
+        <button (click)="onCreate(contactForm)" type="submit" primary block>Create</button>
+      </div>
+    </form>
+  </ion-list>
+
+</ion-content>

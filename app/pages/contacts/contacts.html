@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Contacts</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content contacts-list">
+  <ion-list>
+  <form #contactForm="ngForm" novalidate>
+    <ion-item>
+      <ion-input placeholder="Keyword" type="text" value=""></ion-input>
+      <ion-select [(ngModel)]="group" placeholder="Group">
+        <ion-option *ngFor="let group of groups"  value="{{group.id}}">{{group.user_group}}</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="campaign" placeholder="Campaign">
+        <ion-option *ngFor="let campaign of campaigns"  value="{{campaign.id}}">{{campaign.campaign_name}}</ion-option>
+      </ion-select>      
+    </ion-item>
+    <div padding>
+        <button (click)="onSearch(contactForm)" type="submit" primary block>Search</button>
+      </div>
+    </form>
+  </ion-list>
+
+  <ion-list>
+  <ion-item *ngFor="let contact of contacts" class="contacts">
+    <ion-label style="display:none;"></ion-label>
+    <ion-select [(ngModel)]="contact.name" alertOptions= "setTitle('')" placeholder="Action" item-right>
+      <ion-option value="1">Meeting</ion-option>
+      <ion-option value="2">Cycle</ion-option>
+      <ion-option value="3">Follow Up</ion-option>
+      <ion-option value="4">Inactive</ion-option>
+      <ion-option value="5">Remove</ion-option>
+      <ion-option value="6">Conversation</ion-option>
+      <ion-option value="7">Enter Activity</ion-option>
+    </ion-select>
+    <ion-label>
+      <h2>{{contact.name}}</h2>
+      <h4>Group Name, Company, Title</h4>
+      <button small>
+      <ion-icon name="person"></ion-icon>Vip</button>,
+      <button small danger><ion-icon name="person"></ion-icon>Vip</button>
+      <button small>Active</button>
+      <button small danger>Others</button>
+      <button small round>6</button>
+      <button small round>6</button>
+    </ion-label>             
+    </ion-item>
+</ion-list>

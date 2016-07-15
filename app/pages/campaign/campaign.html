@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Campaigns</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="outer-content contacts-list">
+  <ion-list no-border>
+  <ion-item *ngFor="let contact of contacts" class="contacts">
+    <ion-toggle checked="true"></ion-toggle>
+      <ion-label>
+        <h2>Campaign Name</h2>
+        <h4>Campaign Date Email Count</h4>
+      </ion-label>
+  </ion-item>
+  </ion-list>
+</ion-content>
