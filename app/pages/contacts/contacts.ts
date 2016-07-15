@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionSheet, NavController, Page } from 'ionic-angular';
+import { ActionSheet, NavController,Loading, Page } from 'ionic-angular';
 
 import { ConferenceData } from '../../providers/conference-data';
 
@@ -14,8 +14,10 @@ export class ContactsPage {
   contacts = [];
   campaigns;
   groups;
+  loading;
 
   constructor(private nav: NavController, confData: ConferenceData,userData: UserData) {
+    this.showLoader();
     confData.getSpeakers().then(contacts => {
       this.contacts = contacts;
       console.log(contacts)
@@ -24,12 +26,23 @@ export class ContactsPage {
     	let resultData;
         resultData = groups;
     	this.groups = resultData.user_groups;
-    });
-
-    userData.getCampaigns().then(campaigns=>{
-    	let resultData;
-        resultData = campaigns;
-    	this.campaigns = resultData.campaigns;
+    	userData.getCampaigns().then(campaigns=>{
+	    	let resultData;
+	        resultData = campaigns;
+	    	this.campaigns = resultData.campaigns;
+	    	this.hideLoader();
+    	});
     });
   }
+	showLoader(){
+	    this.loading = Loading.create({
+	      content: 'Please wait...',
+	    });
+	    this.nav.present(this.loading);
+	}
+
+	hideLoader(){
+		this.loading.dismiss();
+		this.loading.dismiss();
+	}
 }

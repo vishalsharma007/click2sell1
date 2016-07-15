@@ -14,14 +14,25 @@ export class LoginPage {
   login: {username?: string, password?: string} = {username : 'vsharma@enbake.com',password: '123123'};
   submitted = false;
   loading;
-  constructor(private nav: NavController, private userData: UserData) {}
+  constructor(private nav: NavController, private userData: UserData) {
+    setTimeout(() => {
+    this.userData.getToken().then(userdata => {
+      let data = JSON.parse(userdata);
+      let token = data.api_token;
+      console.log(token);
+      if(token){
+        this.nav.push(ContactsPage);
+        this.nav.setRoot(ContactsPage);
+      }        
+    });
+    },1000);
+  }
 
   onLogin(form) {
     this.submitted = true;
 
     if (form.valid) {
-      this.nav.push(ContactsPage);
-      //this.showLoader();
+      this.showLoader();
       this.userData.login(this.login.username,this.login.password).then(results=>{
         this.hideLoader();
         let resultData;
@@ -30,6 +41,7 @@ export class LoginPage {
         if(resultData.success == true){
           this.userData.setLoginUser(resultData.user);
           this.nav.push(ContactsPage);
+          this.nav.setRoot(ContactsPage);
         } else{
           this.doAlert('Error','Invalid username/password. Please try again.');
         }
@@ -54,7 +66,6 @@ export class LoginPage {
   }
 
   hideLoader(){
-    this.nav.remove(this.loading)
+    this.loading.dismiss();
   }
-
 }

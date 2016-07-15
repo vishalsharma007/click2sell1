@@ -101,6 +101,8 @@ class ConferenceApp {
       // Give the menu time to close before changing to logged out
       setTimeout(() => {
         this.userData.logout();
+        this.nav.push(LoginPage);
+        this.nav.setRoot(LoginPage);
       }, 1000);
     }
   }
