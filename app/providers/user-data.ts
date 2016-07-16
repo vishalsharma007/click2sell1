@@ -36,11 +36,11 @@ export class UserData {
       params.set('login[email]', username);
       params.set('login[password]', password);
       this.headers = new Headers();
-      this.headers.append('api_call',  'true');
+      this.headers.append('apicall',  'true');
 
       let options = new RequestOptions({
           method: RequestMethod.Get,
-          url: 'http://vsharmademoapp.pagekite.me/api_sign_in/create.json',
+          url: 'https://dev.click2sell.com/api_sign_in/create.json',
           headers: this.headers,
           search: params
       });
@@ -56,7 +56,7 @@ export class UserData {
   }
 
   setLoginUser(user){
-    console.log("hsfsdfdsf");
+    console.log("setLoginUser hsfsdfdsf");
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.storage.set('userdata', JSON.stringify(user));
     this.events.publish('user:login');
@@ -106,14 +106,14 @@ export class UserData {
         let data = JSON.parse(userdata);
         let token = data.api_token;
         this.headers = new Headers();
-        this.headers.append('api_call',  'true');
+        this.headers.append('apicall',  'true');
         this.headers.append('Authorization','Token token='+token);
         console.log('token here');
         console.log(token);
         console.log('Token token='+token);
         let options = new RequestOptions({
           method: RequestMethod.Get,
-          url: 'http://vsharmademoapp.pagekite.me/user_contacts/get_user_contact_group_list.json',
+          url: 'https://dev.click2sell.com/user_contacts/get_user_contact_group_list.json',
           headers: this.headers,
         });
 
@@ -133,12 +133,12 @@ export class UserData {
         let data = JSON.parse(userdata);
         let token = data.api_token;
         this.headers = new Headers();
-        this.headers.append('api_call',  'true');
+        this.headers.append('apicall',  'true');
         this.headers.append('Authorization','Token token='+token);
         console.log(this.headers);
         let options = new RequestOptions({
             method: RequestMethod.Get,
-            url: 'http://vsharmademoapp.pagekite.me/campaigns/get_campaign_list.json',
+            url: 'https://dev.click2sell.com/campaigns/get_campaign_list.json',
             headers: this.headers,
         });
 
@@ -158,12 +158,12 @@ export class UserData {
         let data = JSON.parse(userdata);
         let token = data.api_token;
         this.headers = new Headers();
-        this.headers.append('api_call',  'true');
+        this.headers.append('apicall',  'true');
         this.headers.append('Authorization','Token token='+token);
         console.log(this.headers);
         let options = new RequestOptions({
             method: RequestMethod.Get,
-            url: 'http://vsharmademoapp.pagekite.me/campaigns/get_campaign_data.json',
+            url: 'https://dev.click2sell.com/campaigns/get_campaign_data.json',
             headers: this.headers,
         });
 
@@ -186,12 +186,12 @@ export class UserData {
       let data = JSON.parse(userdata);
       let token = data.api_token;
       this.headers = new Headers();
-      this.headers.append('api_call',  'true');
+      this.headers.append('apicall',  'true');
       this.headers.append('Authorization','Token token='+token);
       console.log(this.headers);
       let options = new RequestOptions({
           method: RequestMethod.Post,
-          url: 'http://vsharmademoapp.pagekite.me/campaigns/change_state.json',
+          url: 'https://dev.click2sell.com/campaigns/change_state.json',
           headers: this.headers,
           search : params
       });
@@ -216,12 +216,12 @@ export class UserData {
         let data = JSON.parse(userdata);
         let token = data.api_token;
         this.headers = new Headers();
-        this.headers.append('api_call',  'true');
+        this.headers.append('apicall',  'true');
         this.headers.append('Authorization','Token token='+token);
         console.log(this.headers);
         let options = new RequestOptions({
             method: RequestMethod.Get,
-            url: 'http://vsharmademoapp.pagekite.me/user_contacts/search_contacts.json',
+            url: 'https://dev.click2sell.com/user_contacts/search_contacts.json',
             headers: this.headers,
             search: params
         });

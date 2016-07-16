@@ -46,9 +46,11 @@ export class CampaignPage {
 	        {
 	          text: 'No',
 	          handler: () => {
-	          	let oldstatus = (status == 'true') ? 'false' : 'true';
-	          	console.log(document.getElementById(id));
-	            document.getElementById(id).setAttribute('checked',oldstatus);
+	          	
+	          	let oldstatus = !status;
+	          	console.log(document.getElementById(id.toString()));
+	          	console.log(id.toString())
+	          	 document.getElementById(id).setAttribute("checked",oldstatus.toString());
 	          }
 	        },
 	        {
