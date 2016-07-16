@@ -8,11 +8,11 @@
 </ion-header>
 <ion-content class="outer-content contacts-list">
   <ion-list no-border>
-  <ion-item *ngFor="let contact of contacts" class="contacts">
-    <ion-toggle checked="true"></ion-toggle>
+  <ion-item *ngFor="let campaign of campaigns" class="contacts">
+    <ion-toggle [(ngModel)]="campaign.status" id="{{campaign.id}}" (ionChange)="changeStatus(campaign.id,campaign.status,$event)" checked="campaign.status"></ion-toggle>
       <ion-label>
-        <h2>Campaign Name</h2>
-        <h4>Campaign Date Email Count</h4>
+        <h2>{{campaign.campaign_name}}
+        &nbsp;<button small secondary [hidden]="!campaign.scheduled_mail"><ion-icon name="mail"></ion-icon>{{campaign.scheduled_mail}}&nbsp;</button></h2>
       </ion-label>
   </ion-item>
   </ion-list>

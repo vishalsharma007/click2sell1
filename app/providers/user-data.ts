@@ -150,10 +150,92 @@ export class UserData {
           resolve(res.json());
           });
         });
+      });          
+  }
+
+    getCampaignsData() {
+      return this.getToken().then((userdata) => {
+        let data = JSON.parse(userdata);
+        let token = data.api_token;
+        this.headers = new Headers();
+        this.headers.append('api_call',  'true');
+        this.headers.append('Authorization','Token token='+token);
+        console.log(this.headers);
+        let options = new RequestOptions({
+            method: RequestMethod.Get,
+            url: 'http://vsharmademoapp.pagekite.me/campaigns/get_campaign_data.json',
+            headers: this.headers,
+        });
+
+        return new Promise(resolve => {
+          this.http.request(new Request(options))
+          .subscribe(res => {
+          // we've got back the raw data, now generate the core schedule data
+          // and save the data for later reference
+          resolve(res.json());
+          });
+        });
+      });          
+  }
+
+    updateCampaignStatus(id,status) {
+      let params: URLSearchParams = new URLSearchParams(); 
+      params.set('active_state', status);
+      params.set('id', id);
+      return this.getToken().then((userdata) => {
+      let data = JSON.parse(userdata);
+      let token = data.api_token;
+      this.headers = new Headers();
+      this.headers.append('api_call',  'true');
+      this.headers.append('Authorization','Token token='+token);
+      console.log(this.headers);
+      let options = new RequestOptions({
+          method: RequestMethod.Post,
+          url: 'http://vsharmademoapp.pagekite.me/campaigns/change_state.json',
+          headers: this.headers,
+          search : params
       });
 
-          
+      return new Promise(resolve => {
+        this.http.request(new Request(options))
+        .subscribe(res => {
+        // we've got back the raw data, now generate the core schedule data
+        // and save the data for later reference
+        resolve(res.json());
+        });
+      });
+    });          
   }
+
+  searchContacts(contact_search,group_id,campaign_id) {
+      let params: URLSearchParams = new URLSearchParams(); 
+      params.set('contact_search', contact_search);
+      params.set('campaign_id', campaign_id);
+      params.set('group_id', group_id);
+      return this.getToken().then((userdata) => {
+        let data = JSON.parse(userdata);
+        let token = data.api_token;
+        this.headers = new Headers();
+        this.headers.append('api_call',  'true');
+        this.headers.append('Authorization','Token token='+token);
+        console.log(this.headers);
+        let options = new RequestOptions({
+            method: RequestMethod.Get,
+            url: 'http://vsharmademoapp.pagekite.me/user_contacts/search_contacts.json',
+            headers: this.headers,
+            search: params
+        });
+
+        return new Promise(resolve => {
+          this.http.request(new Request(options))
+          .subscribe(res => {
+          // we've got back the raw data, now generate the core schedule data
+          // and save the data for later reference
+          resolve(res.json());
+          });
+        });
+      });          
+  } 
 
 }
 
