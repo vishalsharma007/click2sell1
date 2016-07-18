@@ -32,8 +32,10 @@ class ConferenceApp {
   // the login page disables the left menu
   messagePages: PageObj[] = [
     { title: 'Inbox', component: MessagesPage, icon: 'information-circle' },
-    { title: 'Meetings', component: MessagesPage, index: 1, icon: 'information-circle' },
-    { title: 'Deleted Meetings', component: MessagesPage, index: 2, icon: 'information-circle' },
+    //{ title: 'Meetings', component: MessagesPage, index: 1, icon: 'information-
+    //circle' },
+    //{ title: 'Deleted Meetings', component: MessagesPage, index: 2, icon: 
+    //'information-circle' },
     { title: 'Follow up', component: MessagesPage, index: 3, icon: 'information-circle' },
     { title: 'Cycle', component: MessagesPage, index: 3, icon: 'information-circle' },
     { title: 'Inactive', component: MessagesPage, index: 3, icon: 'information-circle' },
