@@ -5,6 +5,7 @@ import { ActionSheet, NavController,Loading, Page,Alert } from 'ionic-angular';
 import { ConferenceData } from '../../providers/conference-data';
 
 import { UserData } from '../../providers/user-data';
+import {EditContactPage} from '../editcontact/editcontact';
 
 import { LoginPage } from '../login/login';
 
@@ -136,7 +137,11 @@ export class ContactsPage {
 
 
   	editContact(contact_id){
-  		console.log(contact_id);
+	  		console.log("Here in editContact");
+	    	this.nav.push(EditContactPage, {id:contact_id});
+	    	this.nav.setRoot(EditContactPage, {id:contact_id});
+	    
+
   	}
   	onClear(form){
   		this.contact_search = '';

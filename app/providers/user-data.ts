@@ -278,8 +278,84 @@ export class UserData {
         });
       });
     });          
+  }
+  
+  getUserDetails(user_id){
+  let params: URLSearchParams = new URLSearchParams();
+    console.log("hello viewUserDetails");
+    console.log(user_id);
+    params.set('id', user_id);
+      return this.getToken().then((userdata) => { 
+      let data = JSON.parse(userdata);
+      let token = data.api_token;
+      console.log("token");
+      console.log(token);
+      this.headers = new Headers();
+      this.headers.append('apicall',  'true');
+      this.headers.append('Authorization','Token token='+token);
+      console.log(this.headers);
+      console.log("below Authorization page");
+      let options = new RequestOptions({
+          method: RequestMethod.Get,
+          url: 'https://dev.click2sell.com/user_contacts/get_contact.json',
+          headers: this.headers,
+          search : params
+      });
+
+      return new Promise(resolve => {
+        this.http.request(new Request(options))
+        .subscribe(res => {
+        // we've got back the raw data, now generate the core schedule data
+        // and save the data for later reference
+        resolve(res.json());
+        });
+      });
+    });          
+  }
+
+  updateContact(formData, group_name){
+  let params: URLSearchParams = new URLSearchParams();
+    console.log("hello  updateContact");
+    console.log(formData);
+    console.log("contact_group");
+    console.log(group_name)
+      for (var key in formData) {
+      if (formData.hasOwnProperty(key)) {
+        params.set('user_contact['+key+']', formData[key]);
+      }
     }
     
+    params.set('contact_group', group_name);
+      
+      return this.getToken().then((userdata) => { 
+      let data = JSON.parse(userdata);
+      let token = data.api_token;
+      console.log("token");
+      console.log(token);
+      this.headers = new Headers();
+      this.headers.append('apicall',  'true');
+      this.headers.append('Authorization','Token token='+token);
+      console.log(this.headers);
+      console.log("dfdfs");
+      console.log(params);
+      let options = new RequestOptions({
+          method: RequestMethod.Post,
+          url: 'https://dev.click2sell.com/user_contacts/update_contact.json',
+          headers: this.headers,
+          search : params
+      });
+
+      return new Promise(resolve => {
+        this.http.request(new Request(options))
+        .subscribe(res => {
+        // we've got back the raw data, now generate the core schedule data
+        // and save the data for later reference
+        resolve(res.json());
+        });
+      });
+    });          
+  } 
+
 }
 
 
