@@ -43,7 +43,9 @@ export class ContactsPage {
   	onSearch(form){
   		console.log(form);
   		console.log(this.contact_search);
+  		console.log("-------------------------------");
   		console.log(this.group_id);
+  		
   		console.log(this.campaign_id);
   		this.showLoader();
   		this.userData.searchContacts(this.contact_search,this.group_id,this.campaign_id).then(contactData=>{
@@ -71,6 +73,68 @@ export class ContactsPage {
 	        }	    	
     	});
   	}
+
+  	showOption(contact_id){
+	    let alert = Alert.create();
+	    alert.setTitle('Select Response');
+
+	    alert.addInput({
+	      type: 'radio',
+	      label: 'Meeting',
+	      value: '1',
+	      checked: true
+	    });
+
+	    alert.addInput({
+	      type: 'radio',
+	      label: 'Cycle',
+	      value: '2',
+	    });
+
+	    alert.addInput({
+	      type: 'radio',
+	      label: 'Follow Up',
+	      value: '3',
+	    });
+
+	    alert.addInput({
+	      type: 'radio',
+	      label: 'Inactive',
+	      value: '4',
+	    });
+
+	    alert.addInput({
+	      type: 'radio',
+	      label: 'Remove',
+	      value: '5',
+	    });
+
+	    alert.addInput({
+	      type: 'radio',
+	      label: 'Conversation',
+	      value: '6',
+	    });
+
+	    alert.addInput({
+	      type: 'radio',
+	      label: 'Enter Activity',
+	      value: '7',
+	    });
+
+	    alert.addButton('Cancel');
+	    alert.addButton({
+	      text: 'OK',
+	      handler: data => {
+	      	console.log(data);
+	      	console.log(contact_id);
+	      }
+	    });
+
+	    this.nav.present(alert);
+
+  	}
+
+
   	editContact(contact_id){
   		console.log(contact_id);
   	}

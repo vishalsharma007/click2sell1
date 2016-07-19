@@ -34,21 +34,6 @@
   </form>
   </ion-list>
   <ion-list>
-  <ion-item class="contacts">
-    <ion-label>Select Action</ion-label>
-    <ion-select [(ngModel)]="contact.response" placeholder="Action" item-right>
-      <ion-option value="1">Meeting</ion-option>
-      <ion-option value="2">Cycle</ion-option>
-      <ion-option value="3">Follow Up</ion-option>
-      <ion-option value="4">Inactive</ion-option>
-      <ion-option value="5">Remove</ion-option>
-      <ion-option value="6">Conversation</ion-option>
-      <ion-option value="7">Enter Activity</ion-option>
-    </ion-select>
-    </ion-item>
-  </ion-list>
- 
- <ion-list>
   <ion-item *ngFor="let contact of contacts" class="contacts">
       <div>
       <div style="float:left;">
@@ -67,7 +52,8 @@
       <button small secondary><ion-icon name="mail"></ion-icon>{{contact.email_position}}&nbsp;&nbsp;</button>      
       </div>
       <div style="float:right">
-      <input name="contact" id="contact.id" type="radio" value="1" item-right/>
+      <input name="contact" (click) = "showOption(contact.id);" id="contact.id" type="radio" value="contact.id" item-right/>
+      <br/>
       <img src="img/edit.png" (click)="editContact(contact.id)" style="cursor:pointer;">
       </div>
       </div>
