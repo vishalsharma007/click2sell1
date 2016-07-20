@@ -26,7 +26,7 @@ export class AddContactPage {
   }
 
   onCreate(form) {
-    console.log(this.contact_group)
+    console.log(this.contact_group);
     console.log("here OnCreate!!");
     this.submitted = true;
     if (form.valid) {
