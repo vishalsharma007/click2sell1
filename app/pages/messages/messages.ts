@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams,ActionSheet,Loading, NavController, Page } from 'ionic-angular';
-//import { ConferenceData } from '../../providers/conference-data';
+import { MessageDetail } from '../messageDetail/messageDetail';
 import { UserData } from '../../providers/user-data';
 
 @Component({
@@ -40,11 +40,7 @@ export class MessagesPage {
   }
     itemSelected(message){
         console.log(message);
-        this.confData.getMessageDetail(message.id).then(res => {
-            let resultData;
-            resultData = res;
-           console.log(resultData);
-        });
+        this.nav.setRoot(MessageDetail, {messageId: message.id});
     }
 
     showLoader(){
