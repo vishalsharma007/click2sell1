@@ -3,16 +3,15 @@
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Message Detail
-            <span style="margin-left: 121px;">
-            <ion-icon ios="ios-send" md="md-send" (click)="showOption(1);" item-right></ion-icon></span>
-        </ion-title>
+        <ion-title>Message Detail </ion-title>
 
     </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content contacts-list">
-
+    <button type="submit" class="button button-block button-positive" (click)="showOption(1);">
+        <ion-icon ios="ios-send" md="md-send"></ion-icon>
+    </button>
 <ion-card *ngFor="let message of messageDetail">
     <ion-card-header>
         <h3 item-left>{{message.subject}}</h3>
