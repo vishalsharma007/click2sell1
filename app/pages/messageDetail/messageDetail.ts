@@ -19,7 +19,7 @@ export class MessageDetail{
                 let resultData;
                 resultData = res;
                 this.messageDetail = resultData.conversation;
-                console.log(resultData.conversation);
+                console.log("**************",resultData.conversation);
               this.hideLoader();
             });
         }

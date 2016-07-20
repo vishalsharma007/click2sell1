@@ -12,12 +12,13 @@
     <button type="submit" class="button button-block button-positive" (click)="showOption(1);">
         <ion-icon ios="ios-send" md="md-send"></ion-icon>
     </button>
+
 <ion-card *ngFor="let message of messageDetail">
     <ion-card-header>
         <h3 item-left>{{message.subject}}</h3>
         <p><b>From:</b> {{message.from}}</p>
         <p><b>To:</b> {{message.to}} </p>
-        <p><ion-icon name="calendar"></ion-icon> {{message.date}}</p>
+        <p [hidden]="!message.date"><ion-icon name="calendar"></ion-icon> {{message.date}}</p>
     </ion-card-header>
     <hr/>
     <ion-card-content>
@@ -25,4 +26,5 @@
     </ion-card-content>
 
 </ion-card>
+
 </ion-content>

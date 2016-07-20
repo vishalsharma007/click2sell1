@@ -295,6 +295,59 @@ export class UserData {
             });
         })
     }
+
+    getMeetingDetail(id){
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('id', id);
+        return this.getToken().then((userdata) => {
+            let data = JSON.parse(userdata);
+            let token = data.api_token;
+            this.headers = new Headers();
+            this.headers.append('apicall',  'true');
+            this.headers.append('Authorization','Token token='+token);
+            console.log(this.headers);
+            let options = new RequestOptions({
+                method: RequestMethod.Get,
+                url: 'https://dev.click2sell.com/messages_api/view_meeting.json',
+                headers: this.headers,
+                search: params
+            });
+
+            return new Promise(resolve => {
+                this.http.request(new Request(options))
+                    .subscribe(res => {
+                        // we've got back the raw data, now generate the core schedule data
+                        // and save the data for later reference
+                        resolve(res.json());
+                    });
+            });
+        })
+    }
+    getMeetingData(){
+
+        return this.getToken().then((userdata) => {
+            let data = JSON.parse(userdata);
+            let token = data.api_token;
+            this.headers = new Headers();
+            this.headers.append('apicall',  'true');
+            this.headers.append('Authorization','Token token='+token);
+            console.log(this.headers);
+            let options = new RequestOptions({
+                method: RequestMethod.Get,
+                url: 'https://dev.click2sell.com/messages_api/get_meeting.json',
+                headers: this.headers
+            });
+
+            return new Promise(resolve => {
+                this.http.request(new Request(options))
+                    .subscribe(res => {
+                        // we've got back the raw data, now generate the core schedule data
+                        // and save the data for later reference
+                        resolve(res.json());
+                    });
+            });
+        })
+    }
   addContact(formData, group_name){
   let params: URLSearchParams = new URLSearchParams();
     console.log("hello add contacts");

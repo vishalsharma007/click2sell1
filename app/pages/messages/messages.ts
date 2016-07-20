@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams,ActionSheet,Loading, NavController, Page } from 'ionic-angular';
 import { MessageDetail } from '../messageDetail/messageDetail';
+import { MeetingDetail } from '../meetingDetail/meetingDetail';
 import { UserData } from '../../providers/user-data';
 
 @Component({
@@ -8,7 +9,7 @@ import { UserData } from '../../providers/user-data';
 })
 export class MessagesPage {
   // set the root pages for each tab
-
+  hideElement;
   mySelectedIndex: number;
     messages = [];
     title = "Inbox";
@@ -25,22 +26,43 @@ export class MessagesPage {
           : type == 'inactive' ? 'Inactive'
           : type == 'ok-message' ? 'Ok, I got it'
           : type == 'spam' ? 'Spam'
+          : type == 'meetings' ? 'Meetings'
           : type == 'remove' ? 'Remove' : 'Inbox';
       this.showLoader();
      // calling backend api based on selected messages tab.
-    this.confData.getMessageData(type).then(res => {
-        let resultData;
-        resultData = res;
-        this.messages = resultData.messages;
-        setTimeout(() => {
-            this.hideLoader();
-        }, 1000);
-    });
+      if(type=='meetings'){
+          this.confData.getMeetingData().then(res => {
+              let resultData;
+              resultData = res;
+              this.messages = resultData.meeitngs;
+              setTimeout(() => {
+                  this.hideLoader();
+              }, 1000);
+          });
+
+      }else{
+          this.confData.getMessageData(type).then(res => {
+              let resultData;
+              resultData = res;
+              this.messages = resultData.messages;
+              this.hideElement = resultData.messages == 0 ? true : false;
+              setTimeout(() => {
+                  this.hideLoader();
+              }, 1000);
+          });
+      }
+
 
   }
     itemSelected(message){
+        let type = this.NavParams.data.type;
+        console.log('on selected item ;;;:::: ');
         console.log(message);
-        this.nav.setRoot(MessageDetail, {messageId: message.id});
+        if(type=='meetings'){
+            this.nav.setRoot(MeetingDetail, {messageId: message.id});
+        }else {
+            this.nav.setRoot(MessageDetail, {messageId: message.id});
+        }
     }
 
     showLoader(){
