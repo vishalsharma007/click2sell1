@@ -9,7 +9,6 @@ import { noMatch } from '../noMatch/noMatch';
 })
 
 export class MessageDetail{
-
     loading;
     messageDetail = [];
     constructor(private nav: NavController,private navParams: NavParams , private confData: UserData){
@@ -54,53 +53,47 @@ export class MessageDetail{
             alert.addInput({
                 type: 'radio',
                 label: 'Meeting',
-                value: '1',
+                value: 'meeting',
                 checked: true
             });
 
             alert.addInput({
                 type: 'radio',
                 label: 'Cycle',
-                value: '2'
+                value: 'cycle'
             });
 
             alert.addInput({
                 type: 'radio',
-                label: 'Follow Up',
-                value: '3'
+                label: 'No Action',
+                value: 'no_action'
             });
 
             alert.addInput({
                 type: 'radio',
                 label: 'Inactive',
-                value: '4'
+                value: 'inactive'
             });
 
             alert.addInput({
                 type: 'radio',
                 label: 'Remove',
-                value: '5'
+                value: 'remove'
             });
 
             alert.addInput({
                 type: 'radio',
                 label: 'Conversation',
-                value: '6'
-            });
-
-            alert.addInput({
-                type: 'radio',
-                label: 'Enter Activity',
-                value: '7'
+                value: 'conversation'
             });
 
             alert.addButton('Cancel');
             alert.addButton({
                 text: 'OK',
                 handler: data => {
-                    this.nav.push(Meeting);
-                    console.log(data);
-                    console.log(messageDetail);
+                    this.nav.push(Meeting , {user_contact_id: messageDetail.user_contact_id,type: data});
+//                    console.log(data);
+//                    console.log(messageDetail);
                 }
             });
 

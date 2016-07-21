@@ -6,7 +6,22 @@ import { UserData } from '../../../providers/user-data';
     templateUrl: 'build/pages/response/meeting/meeting.html'
 })
 export class Meeting{
-    constructor(private navParams: NavParams,private nav: NavController){
+    responseData = {};
+
+    constructor(private navParams: NavParams,private nav: NavController, private confData: UserData){
       console.log('response from meeting ......');
+        console.log(navParams.data);
+        let messageDetail = navParams.data;
+        this.confData.getResponseDetail(messageDetail.user_contact_id,messageDetail.type).then(res => {
+            console.log('######---- response data ---- #######');
+            console.log(res);
+            let data = res;
+            this.responseData = data;
+        });
+    }
+
+    onSend(data){
+        console.log("_-------------___");
+        console.log(data);
     }
 }
