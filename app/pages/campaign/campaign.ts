@@ -39,6 +39,7 @@ export class CampaignPage {
 
   changeStatus(id,status,$event) {
   	console.log("changeStatus is called!!")
+      console.log(status);
   	let confirm = Alert.create({
 	      title: 'Confirm update',
 	      message: 'Do you really want to update status?',

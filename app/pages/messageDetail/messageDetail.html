@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Message Detail </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content contacts-list">
+    <button type="submit" class="button button-block button-positive" (click)="showOption(messageDetail);">
+        <ion-icon ios="ios-send" md="md-send"></ion-icon>
+    </button>
+
+<ion-card *ngFor="let message of messageDetail.conversation">
+    <ion-card-header>
+        <h3 item-left>{{message.subject}}</h3>
+        <p><b>From:</b> {{message.from}}</p>
+        <p><b>To:</b> {{message.to}} </p>
+        <p [hidden]="!message.date"><ion-icon name="calendar"></ion-icon> {{message.date}}</p>
+    </ion-card-header>
+    <hr/>
+    <ion-card-content>
+       <p>{{message.content}}</p>
+    </ion-card-content>
+
+</ion-card>
+
+</ion-content>

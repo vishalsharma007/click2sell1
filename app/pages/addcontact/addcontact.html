@@ -18,12 +18,13 @@
           <ion-option *ngFor="let group of groups"  value="{{group.user_group}}">{{group.user_group}}</ion-option>
         </ion-select>
       </ion-item>
-       <ion-item>
+      <ion-item>
         <ion-label floating primary> Or Enter Group Name</ion-label>
           <ion-input [(ngModel)]="contact_group" type="text" ngControl="group"  #group="ngForm" required>
           </ion-input>
-        
+
       </ion-item>
+
       <p [hidden]="group.valid || submitted == false" danger padding-left>
         Group is required
       </p>

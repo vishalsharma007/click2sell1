@@ -18,8 +18,8 @@ export class LoginPage {
     setTimeout(() => {
     this.userData.getToken().then(userdata => {
       let data = JSON.parse(userdata);
-      let token = data.api_token;
-      console.log(token);
+      let token = (data == null) ? null : data.api_token;
+
       if(token){
         this.nav.push(ContactsPage);
         this.nav.setRoot(ContactsPage);

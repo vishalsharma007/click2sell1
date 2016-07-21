@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Meeting Detail </ion-title>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content contacts-list">
+    <button type="submit" class="button button-block button-positive" (click)="showOption(1);">
+    <ion-icon ios="ios-send" md="md-send"></ion-icon>
+    </button>
+    <ion-card>
+    <ion-card-header>
+        <h3 item-left>{{meetingDetail.name}}</h3>
+        <p>{{meetingDetail.company}}</p>
+        <p>{{meetingDetail.primary_email}} </p>
+        <p>{{meetingDetail.primary_phone_number}}</p>
+        <p>{{meetingDetail.current_reply_action}}</p>
+        <p><ion-icon name="calendar"></ion-icon> {{meetingDetail.meeting_date}}</p>
+        <p><ion-icon name="calendar"></ion-icon> {{meetingDetail.next_email_date}}</p>
+    </ion-card-header>
+    <hr/>
+    <ion-card-content>
+        <p>{{meetingDetail.notes}}</p>
+        <p>{{meetingDetail.message}}</p>
+    </ion-card-content>
+
+    </ion-card>
+
+    <ion-card *ngFor="let meeting of meetingDetail.conversation">
+    <ion-card-header>
+        <h3 item-left>{{meeting.subject}}</h3>
+        <p [hidden]="!meeting.from"><b>From:</b> {{meeting.from}}</p>
+        <p [hidden]="!meeting.to"><b>To:</b> {{meeting.to}} </p>
+        <p [hidden]="!meeting.date"><ion-icon name="calendar"></ion-icon> {{meeting.date}}</p>
+    </ion-card-header>
+    <hr/>
+    <ion-card-content>
+        <p>{{meeting.content}}</p>
+    </ion-card-content>
+
+    </ion-card>
+</ion-content>

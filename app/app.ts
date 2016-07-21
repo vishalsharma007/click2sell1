@@ -11,12 +11,14 @@ import { LoginPage } from './pages/login/login';
 import { AddContactPage } from './pages/addcontact/addcontact';
 import { MessagesPage } from './pages/messages/messages';
 import { UserData } from './providers/user-data';
+import { MessageData } from './providers/message-data';
 
 interface PageObj {
   title: string;
   component: any;
   icon: string;
   index?: number;
+  param? : string;
 }
 
 @Component({
@@ -31,22 +33,24 @@ class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   messagePages: PageObj[] = [
-    { title: 'Inbox', component: MessagesPage, icon: 'information-circle' },
+
+    { title: 'Inbox', component: MessagesPage, icon: 'filing',param:'main-inbox' },
+      { title: 'Meetings', component: MessagesPage, icon: 'chatboxes',param:'meetings' },
     //{ title: 'Meetings', component: MessagesPage, index: 1, icon: 'information-
     //circle' },
     //{ title: 'Deleted Meetings', component: MessagesPage, index: 2, icon: 
     //'information-circle' },
-    { title: 'Follow up', component: MessagesPage, index: 3, icon: 'information-circle' },
-    { title: 'Cycle', component: MessagesPage, index: 3, icon: 'information-circle' },
-    { title: 'Inactive', component: MessagesPage, index: 3, icon: 'information-circle' },
-    { title: 'Remove', component: MessagesPage, index: 3, icon: 'information-circle' },
-    { title: 'Ok, I got it', component: MessagesPage, index: 3, icon: 'information-circle' },
-    { title: 'Spam', component: MessagesPage, index: 3, icon: 'information-circle' },
+    { title: 'Follow up', component: MessagesPage, index: 3, icon: 'thumbs-up',param: 'follow-up' },
+    { title: 'Cycle', component: MessagesPage, index: 3, icon: 'repeat', param: 'cycle'},
+    { title: 'Inactive', component: MessagesPage, index: 3, icon: 'warning',param: 'inactive' },
+    { title: 'Remove', component: MessagesPage, index: 3, icon: 'remove-circle', param: 'remove' },
+    { title: 'Ok, I got it', component: MessagesPage, index: 3, icon: 'walk', param: 'ok-message' },
+    { title: 'Spam', component: MessagesPage, index: 3, icon: 'information-circle' , param: 'spam' },
 
   ];
   contactPages: PageObj[] = [
     { title: 'Contacts', component: ContactsPage, icon: 'contacts' },
-    { title: 'Add Contact', component: AddContactPage, index: 1, icon: 'contacts' }
+    { title: 'Add Contact', component: AddContactPage, index: 1, icon: 'person-add' }
   ];
   campaignPages : PageObj[] = [
     { title: 'Campaigns', component: CampaignPage, icon: 'calendar' },
@@ -90,12 +94,14 @@ class ConferenceApp {
     // we wouldn't want the back button to show in this scenario
     console.log(page);
     if (page.index) {
-      this.nav.setRoot(page.component, {tabIndex: page.index});
+      this.nav.setRoot(page.component, {tabIndex: page.index ,type: page.param});
       console.log("in maine root");
-      console.log(page.component);
+        console.log("on click tab param : ::::: ", page.param);
+        console.log(page.component);
     } else {
       console.log('in other root')
-      this.nav.setRoot(page.component);
+        console.log("on click tab param : ::::: ", page.param);
+      this.nav.setRoot(page.component,{type: page.param});
       console.log(page.component);
     }
 
@@ -104,7 +110,7 @@ class ConferenceApp {
       setTimeout(() => {
         this.userData.logout();
         this.nav.push(LoginPage);
-        this.nav.setRoot(LoginPage);
+        this.nav.setRoot(LoginPage,{type:'inbox'});
       }, 1000);
     }
   }
