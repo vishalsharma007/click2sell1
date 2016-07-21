@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { NavParams,ActionSheet,Loading, NavController, Page,Alert } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 import { Meeting } from '../response/meeting/meeting';
+import { cycle } from '../response/Cycle/cycle';
+import { noAction } from '../response/noAction/noAction';
+import { follow } from '../response/follow/follow';
+import { remove } from '../response/remove/remove';
+
 import { noMatch } from '../noMatch/noMatch';
 
 @Component({
@@ -71,6 +76,11 @@ export class MessageDetail{
 
             alert.addInput({
                 type: 'radio',
+                label: 'Follow Up',
+                value: 'follow_up'
+            });
+            alert.addInput({
+                type: 'radio',
                 label: 'Inactive',
                 value: 'inactive'
             });
@@ -91,7 +101,22 @@ export class MessageDetail{
             alert.addButton({
                 text: 'OK',
                 handler: data => {
-                    this.nav.push(Meeting , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    if(data == 'meeting'){
+                        this.nav.push(Meeting , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    }else if(data == 'cycle'){
+                        this.nav.push(cycle , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    }else if(data == 'no_action'){
+                         this.nav.push(noAction , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    }else if(data == 'inactive'){
+
+                    }else if(data == 'remove'){
+                         this.nav.push(remove , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    }else if(data == 'conversation'){
+
+                    }else if(data == 'follow_up'){
+                         this.nav.push(follow , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    }
+
 //                    console.log(data);
 //                    console.log(messageDetail);
                 }

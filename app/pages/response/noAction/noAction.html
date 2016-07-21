@@ -1,0 +1,50 @@
+<ion-header xmlns="http://www.w3.org/1999/html">
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>No Action</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content contacts-list">
+    <form #noActionForm="ngForm" novalidate>
+    <ion-item>
+        <ion-label fixed>Recipients</ion-label>
+        <ion-input [(ngModel)]="responseData.added_contacts" ngControl="added_contacts" type="text"></ion-input>
+    </ion-item>
+    <ion-card>
+        <ion-card-content>
+            <ion-list radio-group>
+                <ion-item>
+                    <ion-label>Wrong contact</ion-label>
+                    <ion-radio value="1" checked></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Not a good fit</ion-label>
+                    <ion-radio value="2"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Out of business</ion-label>
+                    <ion-radio value="3"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Other</ion-label>
+                    <!--<ion-radio value="6"></ion-radio>-->
+                    <ion-input type="text" value=""></ion-input>
+                </ion-item>
+
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <ion-item>
+        <ion-label fixed>Message</ion-label>
+        <ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
+    </ion-item>
+
+    <div padding>
+        <button (click)="onSend(noActionForm)" type="submit" primary block>Send</button>
+        <button (click)="onSend(noActionForm)" type="submit" primary block>Update</button>
+    </div>
+    </form>
+</ion-content>

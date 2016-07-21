@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams,ActionSheet,Loading, NavController, Page,Alert } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
+import { Meeting } from '../response/meeting/meeting';
 
 @Component({
     templateUrl: 'build/pages/meetingDetail/meetingDetail.html'
@@ -25,51 +26,47 @@ export class MeetingDetail{
 
     }
 
-    showOption(contact_id){
+    showOption(meetingDetail){
+        console.log("on click show option for response:::0");
+        console.log(meetingDetail);
         let alert = Alert.create();
         alert.setTitle('Select Response');
 
         alert.addInput({
             type: 'radio',
             label: 'Meeting',
-            value: '1',
+            value: 'meeting',
             checked: true
         });
 
         alert.addInput({
             type: 'radio',
             label: 'Cycle',
-            value: '2'
+            value: 'cycle'
         });
 
         alert.addInput({
             type: 'radio',
-            label: 'Follow Up',
-            value: '3'
+            label: 'No Action',
+            value: 'no_action'
         });
 
         alert.addInput({
             type: 'radio',
             label: 'Inactive',
-            value: '4'
+            value: 'inactive'
         });
 
         alert.addInput({
             type: 'radio',
             label: 'Remove',
-            value: '5'
+            value: 'remove'
         });
 
         alert.addInput({
             type: 'radio',
             label: 'Conversation',
-            value: '6'
-        });
-
-        alert.addInput({
-            type: 'radio',
-            label: 'Enter Activity',
-            value: '7'
+            value: 'conversation'
         });
 
         alert.addButton('Cancel');
@@ -77,7 +74,20 @@ export class MeetingDetail{
             text: 'OK',
             handler: data => {
                 console.log(data);
-                console.log(contact_id);
+                console.log(meetingDetail);
+                if(data == 'meeting'){
+                    this.nav.push(Meeting , {user_contact_id: meetingDetail.user_contact_id,type: data});
+                }else if(data == 'cycle'){
+
+                }else if(data == 'no_action'){
+
+                }else if(data == 'inactive'){
+
+                }else if(data == 'remove'){
+
+                }else if(data == 'conversation'){
+
+                }
             }
         });
 

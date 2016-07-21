@@ -1,0 +1,57 @@
+<ion-header xmlns="http://www.w3.org/1999/html">
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Cycle Response</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content contacts-list">
+    <form #meetingForm="ngForm" novalidate>
+    <ion-item>
+        <ion-label fixed dark>Recipients</ion-label>
+        <ion-input [(ngModel)]="responseData.added_contacts" ngControl="added_contacts" type="text"></ion-input>
+    </ion-item>
+    <ion-card>
+        <ion-card-content>
+            <ion-list radio-group>
+            <ion-item>
+                <ion-label>1 Month</ion-label>
+                <ion-radio value="1" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>2 Month</ion-label>
+                <ion-radio value="2"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>3 Month</ion-label>
+                <ion-radio value="3"></ion-radio>
+            </ion-item>
+             <ion-item>
+                <ion-label>6 Month</ion-label>
+                <ion-radio value="6"></ion-radio>
+             </ion-item>
+             <ion-item>
+               <ion-label>9 Month</ion-label>
+               <ion-radio value="9"></ion-radio>
+             </ion-item>
+             <ion-item>
+                <ion-label>12 Month</ion-label>
+                <ion-radio value="12"></ion-radio>
+             </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+
+    <ion-item>
+        <ion-label fixed dark>Message</ion-label>
+        <ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
+    </ion-item>
+    <div padding>
+        <button (click)="onSend(meetingForm)" type="submit" primary block>Send</button>
+        <button (click)="onSend(meetingForm)" type="submit" primary block>Update</button>
+    </div>
+    </form>
+</ion-content>
