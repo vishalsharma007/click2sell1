@@ -4,16 +4,15 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Message Detail </ion-title>
-
     </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content contacts-list">
-    <button type="submit" class="button button-block button-positive" (click)="showOption(1);">
+    <button type="submit" class="button button-block button-positive" (click)="showOption(messageDetail);">
         <ion-icon ios="ios-send" md="md-send"></ion-icon>
     </button>
 
-<ion-card *ngFor="let message of messageDetail">
+<ion-card *ngFor="let message of messageDetail.conversation">
     <ion-card-header>
         <h3 item-left>{{message.subject}}</h3>
         <p><b>From:</b> {{message.from}}</p>

@@ -57,7 +57,7 @@ export class MessagesPage {
     itemSelected(message){
         let type = this.NavParams.data.type;
         console.log('on selected item ;;;:::: ');
-        console.log(message);
+        console.log(this.messages);
         if(type=='meetings'){
             this.nav.push(MeetingDetail, {messageId: message.id});
         }else {

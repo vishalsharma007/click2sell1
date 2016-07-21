@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavParams,ActionSheet,Loading, NavController, Page,Alert } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
+import { Meeting } from '../response/meeting/meeting';
+import { noMatch } from '../noMatch/noMatch';
 
 @Component({
     templateUrl: 'build/pages/messageDetail/messageDetail.html'
@@ -18,8 +20,8 @@ export class MessageDetail{
             this.confData.getMessageDetail(message_id).then(res => {
                 let resultData;
                 resultData = res;
-                this.messageDetail = resultData.conversation;
-                console.log("**************",resultData.conversation);
+                this.messageDetail = resultData;
+                console.log("**************",resultData);
               this.hideLoader();
             });
         }
@@ -39,63 +41,72 @@ export class MessageDetail{
     }
 
 
-    showOption(contact_id){
-        let alert = Alert.create();
-        alert.setTitle('Select Response');
+    showOption(messageDetail){
+        console.log("on click show option for response:::0");
+        console.log(messageDetail);
+        if(messageDetail.new_user == true){
 
-        alert.addInput({
-            type: 'radio',
-            label: 'Meeting',
-            value: '1',
-            checked: true
-        });
+            this.nav.push(noMatch);
+        }else{
+            let alert = Alert.create();
+            alert.setTitle('Select Response');
 
-        alert.addInput({
-            type: 'radio',
-            label: 'Cycle',
-            value: '2'
-        });
+            alert.addInput({
+                type: 'radio',
+                label: 'Meeting',
+                value: '1',
+                checked: true
+            });
 
-        alert.addInput({
-            type: 'radio',
-            label: 'Follow Up',
-            value: '3'
-        });
+            alert.addInput({
+                type: 'radio',
+                label: 'Cycle',
+                value: '2'
+            });
 
-        alert.addInput({
-            type: 'radio',
-            label: 'Inactive',
-            value: '4'
-        });
+            alert.addInput({
+                type: 'radio',
+                label: 'Follow Up',
+                value: '3'
+            });
 
-        alert.addInput({
-            type: 'radio',
-            label: 'Remove',
-            value: '5'
-        });
+            alert.addInput({
+                type: 'radio',
+                label: 'Inactive',
+                value: '4'
+            });
 
-        alert.addInput({
-            type: 'radio',
-            label: 'Conversation',
-            value: '6'
-        });
+            alert.addInput({
+                type: 'radio',
+                label: 'Remove',
+                value: '5'
+            });
 
-        alert.addInput({
-            type: 'radio',
-            label: 'Enter Activity',
-            value: '7'
-        });
+            alert.addInput({
+                type: 'radio',
+                label: 'Conversation',
+                value: '6'
+            });
 
-        alert.addButton('Cancel');
-        alert.addButton({
-            text: 'OK',
-            handler: data => {
-                console.log(data);
-                console.log(contact_id);
-            }
-        });
+            alert.addInput({
+                type: 'radio',
+                label: 'Enter Activity',
+                value: '7'
+            });
 
-        this.nav.present(alert);
+            alert.addButton('Cancel');
+            alert.addButton({
+                text: 'OK',
+                handler: data => {
+                    this.nav.push(Meeting);
+                    console.log(data);
+                    console.log(messageDetail);
+                }
+            });
+
+            this.nav.present(alert);
+        }
+
 
     }
 }
