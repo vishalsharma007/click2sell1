@@ -313,20 +313,22 @@ export class UserData {
     });          
   }
 
-  updateContact(formData, group_name){
+  updateContact(formData, group_name, id){
   let params: URLSearchParams = new URLSearchParams();
     console.log("hello  updateContact");
     console.log(formData);
     console.log("contact_group");
+    console.log(id);
     console.log(group_name)
       for (var key in formData) {
       if (formData.hasOwnProperty(key)) {
+        console.log(key+" : "+formData[key]);
         params.set('user_contact['+key+']', formData[key]);
       }
     }
     
     params.set('contact_group', group_name);
-      
+    params.set('id', id);
       return this.getToken().then((userdata) => { 
       let data = JSON.parse(userdata);
       let token = data.api_token;
@@ -342,7 +344,7 @@ export class UserData {
           method: RequestMethod.Post,
           url: 'https://dev.click2sell.com/user_contacts/update_contact.json',
           headers: this.headers,
-          search : params
+          body : params
       });
 
       return new Promise(resolve => {

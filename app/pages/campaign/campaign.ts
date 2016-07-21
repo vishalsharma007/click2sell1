@@ -46,7 +46,6 @@ export class CampaignPage {
 	        {
 	          text: 'No',
 	          handler: () => {
-	          	
 	          	let oldstatus = !status;
 	          	console.log(document.getElementById(id.toString()));
 	          	console.log(id.toString())

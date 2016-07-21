@@ -26,7 +26,6 @@ export class ContactsPage {
 
   constructor(private nav: NavController, confData: ConferenceData,private userData: UserData) {
     this.showLoader();
-
     userData.getGroups().then(groups=>{
     	let resultData;
         resultData = groups;
@@ -139,7 +138,7 @@ export class ContactsPage {
   	editContact(contact_id){
 	  		console.log("Here in editContact");
 	    	this.nav.push(EditContactPage, {id:contact_id});
-	    	this.nav.setRoot(EditContactPage, {id:contact_id});
+	    	// this.nav.setRoot(EditContactPage, {id:contact_id});
 	    
 
   	}
