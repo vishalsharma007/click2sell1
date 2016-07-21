@@ -11,7 +11,9 @@ import { UserData } from '../../providers/user-data';
   templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage {
-  login: {username?: string, password?: string} = {username : 'vsharma.demo@enbake.com',password: '123123'};
+  login: {username?: string, 
+  password?: string
+};
   submitted = false;
   loading;
   constructor(private nav: NavController, private userData: UserData) {
