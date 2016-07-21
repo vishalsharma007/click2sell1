@@ -34,23 +34,23 @@ class ConferenceApp {
   // the login page disables the left menu
   messagePages: PageObj[] = [
 
-    { title: 'Inbox', component: MessagesPage, icon: 'information-circle',param:'main-inbox' },
-      { title: 'Meetings', component: MessagesPage, icon: 'information-circle',param:'meetings' },
+    { title: 'Inbox', component: MessagesPage, icon: 'filing',param:'main-inbox' },
+      { title: 'Meetings', component: MessagesPage, icon: 'chatboxes',param:'meetings' },
     //{ title: 'Meetings', component: MessagesPage, index: 1, icon: 'information-
     //circle' },
     //{ title: 'Deleted Meetings', component: MessagesPage, index: 2, icon: 
     //'information-circle' },
-    { title: 'Follow up', component: MessagesPage, index: 3, icon: 'information-circle',param: 'follow-up' },
-    { title: 'Cycle', component: MessagesPage, index: 3, icon: 'information-circle', param: 'cycle'},
-    { title: 'Inactive', component: MessagesPage, index: 3, icon: 'information-circle',param: 'inactive' },
-    { title: 'Remove', component: MessagesPage, index: 3, icon: 'information-circle', param: 'remove' },
-    { title: 'Ok, I got it', component: MessagesPage, index: 3, icon: 'information-circle', param: 'ok-message' },
+    { title: 'Follow up', component: MessagesPage, index: 3, icon: 'thumbs-up',param: 'follow-up' },
+    { title: 'Cycle', component: MessagesPage, index: 3, icon: 'repeat', param: 'cycle'},
+    { title: 'Inactive', component: MessagesPage, index: 3, icon: 'warning',param: 'inactive' },
+    { title: 'Remove', component: MessagesPage, index: 3, icon: 'remove-circle', param: 'remove' },
+    { title: 'Ok, I got it', component: MessagesPage, index: 3, icon: 'walk', param: 'ok-message' },
     { title: 'Spam', component: MessagesPage, index: 3, icon: 'information-circle' , param: 'spam' },
 
   ];
   contactPages: PageObj[] = [
     { title: 'Contacts', component: ContactsPage, icon: 'contacts' },
-    { title: 'Add Contact', component: AddContactPage, index: 1, icon: 'contacts' }
+    { title: 'Add Contact', component: AddContactPage, index: 1, icon: 'person-add' }
   ];
   campaignPages : PageObj[] = [
     { title: 'Campaigns', component: CampaignPage, icon: 'calendar' },

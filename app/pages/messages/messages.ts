@@ -59,9 +59,9 @@ export class MessagesPage {
         console.log('on selected item ;;;:::: ');
         console.log(message);
         if(type=='meetings'){
-            this.nav.setRoot(MeetingDetail, {messageId: message.id});
+            this.nav.push(MeetingDetail, {messageId: message.id});
         }else {
-            this.nav.setRoot(MessageDetail, {messageId: message.id});
+            this.nav.push(MessageDetail, {messageId: message.id});
         }
     }
 
