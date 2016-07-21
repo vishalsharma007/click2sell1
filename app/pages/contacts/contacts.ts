@@ -41,12 +41,6 @@ export class ContactsPage {
   }
 
   	onSearch(form){
-  		console.log(form);
-  		console.log(this.contact_search);
-  		console.log("-------------------------------");
-  		console.log(this.group_id);
-  		
-  		console.log(this.campaign_id);
   		this.showLoader();
   		this.userData.searchContacts(this.contact_search,this.group_id,this.campaign_id).then(contactData=>{
   			console.log("here in results");

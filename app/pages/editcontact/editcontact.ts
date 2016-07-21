@@ -76,7 +76,7 @@ export class EditContactPage {
             console.log("i am ffsfsfsfsf");
           }
             // this.nav.pop();
-          this.nav.pop();
+          // this.nav.pop();
       });
       
     }

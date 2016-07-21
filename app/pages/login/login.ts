@@ -11,7 +11,8 @@ import { UserData } from '../../providers/user-data';
   templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage {
-  login: {username?: string, password?: string} = {username : 'vsharma.demo@enbake.com',password: '123123'};
+
+  login: {username?: string, password?: string} = {username : '',password: ''};
   submitted = false;
   loading;
   constructor(private nav: NavController, private userData: UserData) {
@@ -21,8 +22,8 @@ export class LoginPage {
       let token = (data == null) ? null : data.api_token;
 
       if(token){
-        this.nav.push(ContactsPage);
-        this.nav.setRoot(ContactsPage);
+        this.nav.push(MessagesPage,{type: 'main-inbox'});
+        this.nav.setRoot(MessagesPage,{type: 'main-inbox'});
       }        
     });
     },1000);
@@ -40,8 +41,8 @@ export class LoginPage {
         console.log(resultData);
         if(resultData.success == true){
           this.userData.setLoginUser(resultData.user);
-          this.nav.push(ContactsPage);
-          this.nav.setRoot(ContactsPage);
+          this.nav.push(MessagesPage,{type: 'main-inbox'});
+          this.nav.setRoot(MessagesPage,{type: 'main-inbox'});
         } else{
           this.doAlert('Error','Invalid username/password. Please try again.');
         }
