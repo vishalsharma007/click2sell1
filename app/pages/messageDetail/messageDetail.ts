@@ -94,6 +94,11 @@ export class MessageDetail{
                 label: 'Remove',
                 value: 'remove'
             });
+            alert.addInput({
+              type: 'radio',
+              label: 'Forward',
+              value: 'forward'
+            });
 
             alert.addInput({
                 type: 'radio',
@@ -135,6 +140,23 @@ export class MessageDetail{
 
                     }else if(data == 'follow_up'){
                          this.nav.push(follow , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    }else if (data == "forward"){
+
+                      this.showLoader();
+                      let alert = Alert.create({
+                        title: 'Forward',
+                        subTitle: 'Request Successfully recorded.',
+                        buttons: ['OK']
+                      });
+
+                      this.confData.getResponseDetail(messageDetail.message,data).then(res => {
+                        console.log('######---- response data No Action ---- #######');
+                        console.log(res);
+                        let data = res;
+                        this.hideLoader();
+                        this.nav.present(alert);
+                      });
+
                     }
 
 //                    console.log(data);

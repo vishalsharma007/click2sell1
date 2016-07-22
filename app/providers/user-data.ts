@@ -32,7 +32,7 @@ export class UserData {
 
   login(username,password) {
       console.log(username+""+password)
-      let params: URLSearchParams = new URLSearchParams(); 
+      let params: URLSearchParams = new URLSearchParams();
       params.set('login[email]', username);
       params.set('login[password]', password);
       this.headers = new Headers();
@@ -52,7 +52,7 @@ export class UserData {
         // and save the data for later reference
         resolve(res.json());
         });
-      }); 
+      });
   }
 
   setLoginUser(user){
@@ -125,7 +125,7 @@ export class UserData {
           resolve(res.json());
           });
         });
-      });                
+      });
   }
 
   getCampaigns() {
@@ -150,7 +150,7 @@ export class UserData {
           resolve(res.json());
           });
         });
-      });          
+      });
   }
 
     getCampaignsData() {
@@ -175,11 +175,11 @@ export class UserData {
           resolve(res.json());
           });
         });
-      });          
+      });
   }
 
     updateCampaignStatus(id,status) {
-      let params: URLSearchParams = new URLSearchParams(); 
+      let params: URLSearchParams = new URLSearchParams();
       params.set('active_state', status);
       params.set('id', id);
       return this.getToken().then((userdata) => {
@@ -204,11 +204,11 @@ export class UserData {
         resolve(res.json());
         });
       });
-    });          
+    });
   }
 
   searchContacts(contact_search,group_id,campaign_id) {
-      let params: URLSearchParams = new URLSearchParams(); 
+      let params: URLSearchParams = new URLSearchParams();
       params.set('contact_search', contact_search);
       params.set('campaign_id', campaign_id);
       params.set('group_id', group_id);
@@ -227,14 +227,14 @@ export class UserData {
         });
 
         return new Promise(resolve => {
-          this.http.request(new Request(options)) 
+          this.http.request(new Request(options))
           .subscribe(res => {
           // we've got back the raw data, now generate the core schedule data
           // and save the data for later reference
           resolve(res.json());
           });
         });
-      });          
+      });
   }
     getMessageData(type) {
         console.log('nav params checking ... on get message data ;;;;');
@@ -327,6 +327,9 @@ export class UserData {
         let params: URLSearchParams = new URLSearchParams();
         params.set('id', id);
         params.set('template_name', template_name);
+        console.log("*************** name of templet in api :::");
+        console.log(template_name);
+        let url =  (template_name == 'forward') ? 'https://dev.click2sell.com/messages_api/forward_message.json' : 'https://dev.click2sell.com/user_contacts/find_template_api.json';
         params.set('template_type', "response");
         return this.getToken().then((userdata) => {
             let data = JSON.parse(userdata);
@@ -337,7 +340,7 @@ export class UserData {
             console.log(this.headers);
             let options = new RequestOptions({
                 method: RequestMethod.Get,
-                url: 'https://dev.click2sell.com/user_contacts/find_template_api.json',
+                url: url,
                 headers: this.headers,
                 search: params
             });
@@ -388,10 +391,10 @@ export class UserData {
         params.set('user_contact['+key+']', formData[key]);
       }
     }
-    
+
     params.set('contact_group', group_name);
-      
-      return this.getToken().then((userdata) => { 
+
+      return this.getToken().then((userdata) => {
       let data = JSON.parse(userdata);
       let token = data.api_token;
       console.log("token");
@@ -417,15 +420,15 @@ export class UserData {
         resolve(res.json());
         });
       });
-    });          
+    });
   }
-  
+
   getUserDetails(user_id){
   let params: URLSearchParams = new URLSearchParams();
     console.log("hello viewUserDetails");
     console.log(user_id);
     params.set('id', user_id);
-      return this.getToken().then((userdata) => { 
+      return this.getToken().then((userdata) => {
       let data = JSON.parse(userdata);
       let token = data.api_token;
       console.log("token");
@@ -450,7 +453,7 @@ export class UserData {
         resolve(res.json());
         });
       });
-    });          
+    });
   }
 
   updateContact(formData, group_name){
@@ -464,10 +467,10 @@ export class UserData {
         params.set('user_contact['+key+']', formData[key]);
       }
     }
-    
+
     params.set('contact_group', group_name);
-      
-      return this.getToken().then((userdata) => { 
+
+      return this.getToken().then((userdata) => {
       let data = JSON.parse(userdata);
       let token = data.api_token;
       console.log("token");
@@ -493,8 +496,8 @@ export class UserData {
         resolve(res.json());
         });
       });
-    });          
-  } 
+    });
+  }
 
 
 
