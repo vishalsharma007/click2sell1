@@ -31,7 +31,18 @@ export class MeetingDetail{
         }
 
     }
+  showLoader(){
+    this.loading = Loading.create({
+      content: 'Please wait...'
+    });
+    console.log("here in load");
+    this.nav.present(this.loading);
+  }
 
+  hideLoader(){
+    this.loading.dismiss();
+    this.loading.dismiss();
+  }
     showOption(meetingDetail){
         console.log("on click show option for response:::0");
         console.log(meetingDetail);
@@ -86,7 +97,21 @@ export class MeetingDetail{
                 }else if(data == 'cycle'){
                     this.nav.push(cycle , {user_contact_id: meetingDetail.user_contact_id,type: data});
                 }else if(data == 'no_action'){
-                    this.nav.push(noAction , {user_contact_id: meetingDetail.user_contact_id,type: data});
+                    //this.nav.push(noAction , {user_contact_id: meetingDetail.user_contact_id,type: data});
+                  this.showLoader();
+                  let alert = Alert.create({
+                    title: 'Ok, I got it',
+                    subTitle: 'Successfully Moved!',
+                    buttons: ['OK']
+                  });
+
+                  this.confData.getResponseDetail(meetingDetail.user_contact_id,data).then(res => {
+                    console.log('######---- response data No Action ---- #######');
+                    console.log(res);
+                    let data = res;
+                    this.hideLoader();
+                    this.nav.present(alert);
+                  });
                 }else if(data == 'inactive'){
                     this.nav.push(inActive , {user_contact_id: meetingDetail.user_contact_id,type: data});
                 }else if(data == 'remove'){
