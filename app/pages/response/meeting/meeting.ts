@@ -7,9 +7,10 @@ import { UserData } from '../../../providers/user-data';
 })
 export class Meeting{
     responseData = {};
-
+    loading;
     constructor(private navParams: NavParams,private nav: NavController, private confData: UserData){
       console.log('response from meeting ......');
+         this.showLoader();
         console.log(navParams.data);
         let messageDetail = navParams.data;
         this.confData.getResponseDetail(messageDetail.user_contact_id,messageDetail.type).then(res => {
@@ -17,11 +18,24 @@ export class Meeting{
             console.log(res);
             let data = res;
             this.responseData = data;
+            this.hideLoader();
         });
     }
 
     onSend(data){
         console.log("_-------------___");
         console.log(data);
+    }
+    showLoader(){
+        this.loading = Loading.create({
+            content: 'Please wait...'
+        });
+        console.log("here in load");
+        this.nav.present(this.loading);
+    }
+
+    hideLoader(){
+        this.loading.dismiss();
+        this.loading.dismiss();
     }
 }

@@ -3,14 +3,13 @@ import { NavParams,ActionSheet,Loading, NavController, Page,Alert } from 'ionic-
 import { UserData } from '../../../providers/user-data';
 
 @Component({
-    templateUrl: 'build/pages/response/follow/follow.html'
+    templateUrl: 'build/pages/response/conversation/conversation.html'
 })
-export class follow{
+export class conversation{
     loading;
     responseData = {};
 
     constructor(private navParams: NavParams,private nav: NavController, private confData: UserData){
-        console.log('response from follow up ......');
         console.log(navParams.data);
         this.showLoader();
         let messageDetail = navParams.data;

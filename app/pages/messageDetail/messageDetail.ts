@@ -6,8 +6,12 @@ import { cycle } from '../response/Cycle/cycle';
 import { noAction } from '../response/noAction/noAction';
 import { follow } from '../response/follow/follow';
 import { remove } from '../response/remove/remove';
+import { inActive } from '../response/inActive/inActive';
+import { conversation } from '../response/conversation/conversation';
 
 import { noMatch } from '../noMatch/noMatch';
+
+
 
 @Component({
     templateUrl: 'build/pages/messageDetail/messageDetail.html'
@@ -70,7 +74,7 @@ export class MessageDetail{
 
             alert.addInput({
                 type: 'radio',
-                label: 'No Action',
+                label: 'Ok, I got it',
                 value: 'no_action'
             });
 
@@ -106,12 +110,28 @@ export class MessageDetail{
                     }else if(data == 'cycle'){
                         this.nav.push(cycle , {user_contact_id: messageDetail.user_contact_id,type: data});
                     }else if(data == 'no_action'){
-                         this.nav.push(noAction , {user_contact_id: messageDetail.user_contact_id,type: data});
-                    }else if(data == 'inactive'){
+                        this.showLoader();
+                        let alert = Alert.create({
+                            title: 'Ok, I got it',
+                            subTitle: 'Successfully Moved!',
+                            buttons: ['OK']
+                        });
 
+                        this.confData.getResponseDetail(messageDetail.user_contact_id,data).then(res => {
+                            console.log('######---- response data No Action ---- #######');
+                            console.log(res);
+                            let data = res;
+                            this.hideLoader();
+                            this.nav.present(alert);
+                        });
+
+                         //this.nav.push(noAction , {user_contact_id: messageDetail.user_contact_id,type: data});
+                    }else if(data == 'inactive'){
+                        this.nav.push(inActive , {user_contact_id: messageDetail.user_contact_id,type: data});
                     }else if(data == 'remove'){
                          this.nav.push(remove , {user_contact_id: messageDetail.user_contact_id,type: data});
                     }else if(data == 'conversation'){
+                        this.nav.push(conversation , {user_contact_id: messageDetail.user_contact_id,type: data});
 
                     }else if(data == 'follow_up'){
                          this.nav.push(follow , {user_contact_id: messageDetail.user_contact_id,type: data});
