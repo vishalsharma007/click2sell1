@@ -79,7 +79,11 @@ export class MeetingDetail{
             label: 'Remove',
             value: 'remove'
         });
-
+        alert.addInput({
+          type: 'radio',
+          label: 'Forward',
+          value: 'forward'
+        });
         alert.addInput({
             type: 'radio',
             label: 'Conversation',
@@ -100,7 +104,7 @@ export class MeetingDetail{
                     //this.nav.push(noAction , {user_contact_id: meetingDetail.user_contact_id,type: data});
                   this.showLoader();
                   let alert = Alert.create({
-                    title: 'Ok, I got it',
+                    title: 'Success',
                     subTitle: 'Successfully Moved!',
                     buttons: ['OK']
                   });
@@ -121,6 +125,23 @@ export class MeetingDetail{
 
                 }else if(data == 'follow_up'){
                     this.nav.push(follow , {user_contact_id: meetingDetail.user_contact_id,type: data});
+                }else if (data == "forward"){
+
+                  this.showLoader();
+                  let alert = Alert.create({
+                    title: 'Success',
+                    subTitle: 'Request Successfully recorded.',
+                    buttons: ['OK']
+                  });
+
+                  this.confData.getResponseDetail(meetingDetail.message,data).then(res => {
+                    console.log('######---- response data No Action ---- #######');
+                    console.log(res);
+                    let data = res;
+                    this.hideLoader();
+                    this.nav.present(alert);
+                  });
+
                 }
             }
         });

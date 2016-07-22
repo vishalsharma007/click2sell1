@@ -117,7 +117,7 @@ export class MessageDetail{
                     }else if(data == 'no_action'){
                         this.showLoader();
                         let alert = Alert.create({
-                            title: 'Ok, I got it',
+                            title: 'Success',
                             subTitle: 'Successfully Moved!',
                             buttons: ['OK']
                         });
@@ -144,7 +144,7 @@ export class MessageDetail{
 
                       this.showLoader();
                       let alert = Alert.create({
-                        title: 'Forward',
+                        title: 'Success',
                         subTitle: 'Request Successfully recorded.',
                         buttons: ['OK']
                       });
