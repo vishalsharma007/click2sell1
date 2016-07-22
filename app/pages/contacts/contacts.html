@@ -34,15 +34,16 @@
   </form>
   </ion-list>
   <ion-list>
-  <ion-item *ngFor="let contact of contacts" class="contacts">
+    <ion-item *ngFor="let contact of contacts" class="contacts">
       <div>
       <div style="float:left;">
       <h2>{{contact.firstname}} {{contact.lastname}}</h2>
       <h4>
-        <span [hidden]="contact.group == ''">{{contact.group}}</span>
-        <span [hidden]="!contact.company">, {{contact.company}}</span> 
-        <span [hidden]="!contact.title">, {{contact.title}}</span>
-        <span [hidden]="!contact.campaign">, {{contact.campaign}}</span> 
+        <p><span [hidden]="contact.group == ''">{{contact.group}}</span>
+        <span [hidden]="!contact.company">{{contact.company}}</span> <br/>
+        <span [hidden]="!contact.title">{{contact.title}}</span><br/>
+        <span [hidden]="!contact.campaign"> {{contact.campaign}}</span> 
+        </p>
       </h4>
       <button small secondary [hidden]="contact.vip != true">
       <ion-icon name="person"></ion-icon>Vip</button>
@@ -58,5 +59,5 @@
       </div>
       </div>
       <!--button (click)="editContact(contact.id);">Edit</button-->
-     </ion-item>
+    </ion-item>
 </ion-list>

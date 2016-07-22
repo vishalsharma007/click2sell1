@@ -23,7 +23,6 @@ export class EditContactPage {
      userData.getGroups().then(groups=>{
       let resultData;
       resultData = groups;
-      console.log(resultData);
       this.groups = resultData.user_groups;
       console.log(this.groups);
       this.showLoader();
@@ -31,6 +30,7 @@ export class EditContactPage {
 
         let resultData;
         resultData = details;
+        console.log(resultData);
         console.log("this will be deleted!!");
         console.log(resultData.user_contact.id);
         delete resultData.user_contact.id;
@@ -64,14 +64,18 @@ export class EditContactPage {
         this.hideLoader();
         if(resultData.status == 200){
 
-        this.doAlert("Information","Successfully updated");
+        // this.doAlert("Information","Successfully updated");
 
 
-          // this.nav.pop();
+          this.nav.pop();
 
         }else if(resultData.status == 201 && resultData.error){
             this.doAlert("Information","Please select an existing Group or add a new Group");
-          }else{
+          }else if(resultData.error == 500){
+            this.doAlert("Error","Your email Id contain special character!!");
+          }
+
+          else{
 
             console.log("i am ffsfsfsfsf");
           }

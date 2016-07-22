@@ -377,7 +377,7 @@ export class UserData {
           method: RequestMethod.Post,
           url: 'https://dev.click2sell.com/user_contacts/create_contact.json',
           headers: this.headers,
-          search : params
+          body : params
       });
 
       return new Promise(resolve => {
