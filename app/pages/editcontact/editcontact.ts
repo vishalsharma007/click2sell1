@@ -14,7 +14,7 @@ export class EditContactPage {
   submitted = false;
   groups;
   loading;
-  contact_group = '';
+  contact_group ;
   contactid;
   constructor(private nav: NavController, private userData: UserData,private NavParams:NavParams) {
     
@@ -24,6 +24,7 @@ export class EditContactPage {
       let resultData;
       resultData = groups;
       this.groups = resultData.user_groups;
+       // console.log(this.groups)
       console.log(this.groups);
       this.showLoader();
       userData.getUserDetails(this.contactid).then(details=>{
@@ -33,10 +34,24 @@ export class EditContactPage {
         console.log(resultData);
         console.log("this will be deleted!!");
         console.log(resultData.user_contact.id);
+        console.log(resultData.user_contact_group_name);
+        console.log(resultData.user_contact_group_id);
         delete resultData.user_contact.id;
         delete resultData.user_contact.updated_at;
         delete resultData.user_contact.created_at;
+          if(resultData.user_contact.city == null) resultData.user_contact.city = "";
+          if(resultData.user_contact.firstname == null) resultData.user_contact.firstname = "";
+          if(resultData.user_contact.lastname == null) resultData.user_contact.lastname = "";
+          if(resultData.user_contact.phone == null) resultData.user_contact.phone = "";
+          if(resultData.user_contact.state == null) resultData.user_contact.state = "";
+          if(resultData.user_contact.title == null) resultData.user_contact.title = "";
+          if(resultData.user_contact.zip_code == null) resultData.user_contact.zip_code = "";
+          if(resultData.user_contact.address1 == null) resultData.user_contact.address1 = "";
+          if(resultData.user_contact.address2 == null) resultData.user_contact.address2 = "";
+           this.groups.user_group = resultData.user_contact_group_name;
+           console.log(this.groups.user_group)
         this.contact = resultData.user_contact;
+        // this.groups = resultData.user_contact_group_name;
         this.hideLoader();
         console.log(resultData);   
         // this.contact.id=contactid;
@@ -71,16 +86,14 @@ export class EditContactPage {
 
         }else if(resultData.status == 201 && resultData.error){
             this.doAlert("Information","Please select an existing Group or add a new Group");
-          }else if(resultData.error == 500){
+          }else if(resultData.status == 500){
             this.doAlert("Error","Your email Id contain special character!!");
           }
 
           else{
 
-            console.log("i am ffsfsfsfsf");
+            console.log("i am else");
           }
-            // this.nav.pop();
-          // this.nav.pop();
       });
       
     }

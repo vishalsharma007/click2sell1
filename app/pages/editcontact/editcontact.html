@@ -14,15 +14,11 @@
       <ion-item>
         <ion-label>Select Group</ion-label>
         <ion-select [(ngModel)]="contact_group" ngControl="group" placeholder="Group" #group="ngForm" required>
-       
+        {{groups}}
           <ion-option *ngFor="let group of groups"  value="{{group.user_group}}">{{group.user_group}}</ion-option>
+        }
+        }
         </ion-select>
-      </ion-item>
-       <ion-item>
-        <ion-label floating primary> Or Enter Group Name</ion-label>
-          <ion-input [(ngModel)]="contact_group" type="text" ngControl="group"  #group="ngForm" required>
-          </ion-input>
-        
       </ion-item>
       <p [hidden]="group.valid || submitted == false" danger padding-left>
         Group is required
@@ -71,8 +67,13 @@
         </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating primary>State</ion-label>
+        <ion-label floating primary>State/Province</ion-label>
         <ion-input [(ngModel)]="contact.state" ngControl="state" type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating primary>ZIP CODE</ion-label>
+        <ion-input [(ngModel)]="contact.zip_code" ngControl="zip" type="text">
         </ion-input>
       </ion-item>
       <ion-item>

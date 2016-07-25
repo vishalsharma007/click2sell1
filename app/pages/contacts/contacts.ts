@@ -25,19 +25,7 @@ export class ContactsPage {
   contact = {id : 0};
 
   constructor(private nav: NavController, confData: ConferenceData,private userData: UserData) {
-    this.showLoader();
-    userData.getGroups().then(groups=>{
-    	let resultData;
-        resultData = groups;
-    	this.groups = resultData.user_groups;
-    	console.log(this.groups);
-    	userData.getCampaigns().then(campaigns=>{
-	    	let resultData;
-	        resultData = campaigns;
-	    	this.campaigns = resultData.campaigns;
-	    	this.hideLoader();
-    	});
-    });
+  
   }
 
   	onSearch(form){
