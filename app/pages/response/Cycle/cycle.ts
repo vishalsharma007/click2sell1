@@ -22,10 +22,7 @@ export class cycle{
         });
     }
 
-    onSend(data){
-        console.log("_-------------___");
-        console.log(data);
-    }
+
     showLoader(){
         this.loading = Loading.create({
             content: 'Please wait...'

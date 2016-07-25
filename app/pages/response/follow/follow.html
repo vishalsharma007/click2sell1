@@ -12,6 +12,13 @@
     <ion-item>
         <ion-label fixed>Recipients</ion-label>
         <ion-input [(ngModel)]="responseData.added_contacts" ngControl="added_contacts" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.user_contact_id" ngControl="user_contact_id" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.account_id" ngControl="account_id" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.response" ngControl="response" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.account_zone" ngControl="account_zone" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.date" ngControl="date" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.user_domain" ngControl="user_domain" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.action_name" ngControl="action_name" type="text"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Date</ion-label>

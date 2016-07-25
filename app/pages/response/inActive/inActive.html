@@ -12,29 +12,37 @@
     <ion-item>
         <ion-label fixed>Recipients</ion-label>
         <ion-input [(ngModel)]="responseData.added_contacts" ngControl="added_contacts" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.user_contact_id" ngControl="user_contact_id" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.account_id" ngControl="account_id" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.response" ngControl="response" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.account_zone" ngControl="account_zone" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.date" ngControl="date" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.user_domain" ngControl="user_domain" type="text"></ion-input>
     </ion-item>
     <ion-card>
         <ion-card-content>
-            <ion-list radio-group>
+            <ion-list radio-group [(ngModel)]="responseData.action_name">
                 <ion-item>
                     <ion-label>Wrong contact</ion-label>
-                    <ion-radio value="1" checked></ion-radio>
+                    <ion-radio value="Wrong contact" (click)="onChanges('Wrong contact')"></ion-radio>
                 </ion-item>
                 <ion-item>
                     <ion-label>Not a good fit</ion-label>
-                    <ion-radio value="2"></ion-radio>
+                    <ion-radio value="Not a good fit" (click)="onChanges('Out of business')"></ion-radio>
                 </ion-item>
                 <ion-item>
                     <ion-label>Out of business</ion-label>
-                    <ion-radio value="3"></ion-radio>
+                    <ion-radio value="Out of business" (click)="onChanges('Out of business')"></ion-radio>
                 </ion-item>
                 <ion-item>
                     <ion-label>Other</ion-label>
-                    <!--<ion-radio value="6"></ion-radio>-->
-                    <ion-input type="text" value=""></ion-input>
+                    <ion-radio value="other" (click)="onChanges('other')"></ion-radio>
                 </ion-item>
-
+                <ion-item [hidden]="showText">
+                    <ion-input type="text" [(ngModel)]="responseData.other_reason"></ion-input>
+                </ion-item>
             </ion-list>
+
         </ion-card-content>
     </ion-card>
     <ion-item>
@@ -43,8 +51,8 @@
     </ion-item>
 
     <div padding>
-        <button (click)="onSend(inActive)" type="submit" primary block>Send</button>
-        <button (click)="onSend(inActive)" type="submit" primary block>Update</button>
+        <button (click)="onSend(responseData)" type="submit" primary block>Send</button>
+        <button (click)="onUpdate(responseData)" type="submit" primary block>Update</button>
     </div>
     </form>
 </ion-content>

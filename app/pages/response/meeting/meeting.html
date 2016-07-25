@@ -12,18 +12,25 @@
     <ion-item>
         <ion-label fixed>Recipients</ion-label>
         <ion-input [(ngModel)]="responseData.added_contacts" ngControl="added_contacts" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.user_contact_id" ngControl="user_contact_id" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.account_id" ngControl="account_id" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.response" ngControl="response" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.account_zone" ngControl="account_zone" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.date" ngControl="date" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.user_domain" ngControl="user_domain" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.action_name" ngControl="action_name" type="text"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Date</ion-label>
-        <ion-datetime  [(ngModel)]="responseData.start_date" displayFormat="MM-DD-YYYY"></ion-datetime>
+        <ion-datetime  [(ngModel)]="startDate" displayFormat="YYYY-MM-DD"></ion-datetime>
     </ion-item>
     <ion-item>
         <ion-label>Start Time</ion-label>
-        <ion-datetime [(ngModel)]="responseData.timepicker_start" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+        <ion-datetime [(ngModel)]="timepickerStart" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
     </ion-item>
     <ion-item>
         <ion-label>End Time</ion-label>
-        <ion-datetime  [(ngModel)]="responseData.timepicker_end" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+        <ion-datetime  [(ngModel)]="timepickerEnd" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
     </ion-item>
     <ion-item>
         <ion-label fixed>Location </ion-label>
@@ -38,8 +45,8 @@
         <ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
     </ion-item>
     <div padding>
-        <button (click)="onSend(meetingForm)" type="submit" primary block>Send</button>
-        <button (click)="onSend(meetingForm)" type="submit" primary block>Update</button>
+        <button (click)="onSend(responseData,startDate,timepickerStart,timepickerEnd)" type="submit" primary block>Send</button>
+        <button (click)="onUpdate(responseData,startDate,timepickerStart,timepickerEnd)" type="submit" primary block>Update</button>
     </div>
     </form>
 </ion-content>

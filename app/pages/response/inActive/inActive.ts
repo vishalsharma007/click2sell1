@@ -8,6 +8,8 @@ import { UserData } from '../../../providers/user-data';
 export class inActive{
     responseData = {};
     loading;
+
+    showText: boolean = true;
     constructor(private navParams: NavParams,private nav: NavController, private confData: UserData){
         console.log(navParams.data);
         this.showLoader();
@@ -19,10 +21,61 @@ export class inActive{
             this.hideLoader();
         });
     }
+    onChanges(data){
+        console.log(data);
+      if(data == 'other'){
+           this.showText = false;
+       }else{
+          this.showText = true;
+      }
+    }
 
     onSend(data){
-        console.log("_-------------___");
-        console.log(data);
+        this.showLoader();
+        let alert = Alert.create({
+            title: 'Success',
+            subTitle: 'Request successfully processed!',
+            buttons: ['OK']
+        });
+        let error = Alert.create({
+            title: 'Success',
+            subTitle: 'Error !!',
+            buttons: ['OK']
+        });
+        this.confData.sendResponseData(data,'','','','').then(response =>{
+            this.hideLoader();
+            console.log(response['status']);
+            let status = response['status'];
+            if(status == '200'){
+                this.nav.present(alert);
+            }else{
+                this.nav.present(error);
+            }
+        });
+    }
+
+    onUpdate(data){
+        this.showLoader();
+        let alert = Alert.create({
+            title: 'Success',
+            subTitle: 'Request successfully processed!',
+            buttons: ['OK']
+        });
+        let error = Alert.create({
+            title: 'Success',
+            subTitle: 'Error !!',
+            buttons: ['OK']
+        });
+        this.confData.sendResponseData(data,'','','','update').then(response =>{
+            this.hideLoader();
+            console.log(response['status']);
+            let status = response['status'];
+            if(status == '200'){
+                this.nav.present(alert);
+            }else{
+                this.nav.present(error);
+            }
+        });
     }
     showLoader(){
         this.loading = Loading.create({

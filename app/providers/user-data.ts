@@ -380,6 +380,61 @@ export class UserData {
             });
         })
     }
+
+    sendResponseData(form,startDate,timepickerStart,timepickerEnd,bt_nm){
+
+
+        console.log('inside request::: ',form);
+        console.log('inside request::: ',startDate);
+        console.log('inside request::: ',timepickerEnd);
+        console.log('inside request::: ',timepickerStart);
+        console.log('inside request::: ',bt_nm);
+
+        return this.getToken().then((userdata) => {
+            let data = JSON.parse(userdata);
+            let token = data.api_token;
+            let params: URLSearchParams = new URLSearchParams();
+
+            params.set('user_domain', form.user_domain);
+            params.set('added_contacts', form.added_contacts);
+
+            params.set("message['user_contact_id']", form.user_contact_id);
+            params.set("message['account_id']", form.account_id);
+
+            params.set('action_name', form.action_name);
+            params.set('response', form.response);
+            params.set('bt_nm', bt_nm);
+            params.set('account_zone', form.account_zone);
+            params.set('date', startDate);
+            params.set('timepicker_start', timepickerStart);
+            params.set('timepicker_end', timepickerEnd);
+            params.set('location', form.location);
+            params.set('mess_subject', form.mess_subject);
+            params.set('email_message', form.email_message);
+            params.set('other_reason', form.action_name == 'other' ? form.other_reason : '');
+
+
+            this.headers = new Headers();
+            this.headers.append('apicall',  'true');
+            this.headers.append('Authorization','Token token='+token);
+            console.log(this.headers);
+            let options = new RequestOptions({
+                method: RequestMethod.Post,
+                url: 'https://dev.click2sell.com/messages_api/reply_action_api.json',
+                headers: this.headers,
+                search : params
+            });
+
+            return new Promise(resolve => {
+                this.http.request(new Request(options))
+                    .subscribe(res => {
+                        // we've got back the raw data, now generate the core schedule data
+                        // and save the data for later reference
+                        resolve(res.json());
+                    });
+            });
+        })
+    }
   addContact(formData, group_name){
   let params: URLSearchParams = new URLSearchParams();
     console.log("hello add contacts");
