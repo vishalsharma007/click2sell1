@@ -7,56 +7,42 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="outer-content contacts-list">
-  <ion-list>
   <form #contactForm="ngForm" novalidate>
     <ion-item>
       <ion-label>Enter Keyword</ion-label>
         <ion-input [(ngModel)]="contact_search" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Select Group</ion-label>
-        <ion-select [(ngModel)]="group_id" placeholder="Group">
-          <ion-option *ngFor="let group of groups"  value="{{group.id}}">{{group.user_group}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>   
-        <ion-label>Select Campaign</ion-label>
-        <ion-select [(ngModel)]="campaign_id" placeholder="Campaign">
-          <ion-option *ngFor="let campaign of campaigns"  value="{{campaign.id}}">{{campaign.campaign_name}}</ion-option>
-        </ion-select>
       </ion-item>
       <ion-row responsive-sm>
         <ion-col>
           <button (click)="onSearch(contactForm)" type="submit" primary block>Search</button>
         <!--button (click)="clearSearch(contactForm)" type="button" primary medium round>Clear</button-->
         </ion-col>
-      </ion-row>   
+      </ion-row>
   </form>
-  </ion-list>
-  <ion-list>
-  <ion-item *ngFor="let contact of contacts" class="contacts">
-      <div>
-      <div style="float:left;">
+
+    <ion-item *ngFor="let contact of contacts" class="contacts" text-wrap>
       <h2>{{contact.firstname}} {{contact.lastname}}</h2>
-      <h4>
-        <span [hidden]="contact.group == ''">{{contact.group}}</span>
-        <span [hidden]="!contact.company">, {{contact.company}}</span> 
-        <span [hidden]="!contact.title">, {{contact.title}}</span>
-        <span [hidden]="!contact.campaign">, {{contact.campaign}}</span> 
-      </h4>
+        <p [hidden]="!contact.company">{{contact.company}}</p>
+        <p [hidden]="contact.group == ''">{{contact.group}}</p>
+        <p [hidden]="!contact.title">{{contact.title}}</p>
+        <p [hidden]="!contact.campaign"> {{contact.campaign}}</p>
+
       <button small secondary [hidden]="contact.vip != true">
       <ion-icon name="person"></ion-icon>Vip</button>
       <button small danger [hidden]="contact.vip != false"><ion-icon name="person"></ion-icon>Vip</button>
       <button [hidden]="contact.status != 'Active'" small secondary>{{contact.status}}</button>
       <button [hidden]="contact.status == 'Active'" small danger>{{contact.status}}</button>
-      <button small secondary><ion-icon name="mail"></ion-icon>{{contact.email_position}}&nbsp;&nbsp;</button>      
-      </div>
-      <div style="float:right">
-      <input name="contact" (click) = "showOption(contact.id);" id="contact.id" type="radio" value="contact.id" item-right/>
-      <br/>
-      <img src="img/edit.png" (click)="editContact(contact.id)" style="cursor:pointer;">
-      </div>
+      <button class= "button button-assertive" (click)="editContact(contact.id)">
+      <ion-icon name="create" > </ion-icon>Edit
+      </button>
+      <div item-right>
+      <input style="margin-left: 0px;" name="contact" (click)="showOption(contact.id);" id="contact.id" type="radio" value="contact.id" item-right/>
+      <!--<ion-radio  (click)="showOption(contact.id);" item-right></ion-radio>-->
+      <!--<img src="img/edit.png" (click)="editContact(contact.id)" style="cursor:pointer;">-->
+      <!-- <ion-icon name="create" (click)="editContact(contact.id)"></ion-icon> -->
+      <ion-icon name="mail" item-right> {{contact.email_position}}</ion-icon>
       </div>
       <!--button (click)="editContact(contact.id);">Edit</button-->
-     </ion-item>
-</ion-list>
+    </ion-item>
+
+</ion-content>

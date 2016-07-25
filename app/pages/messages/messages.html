@@ -7,14 +7,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="outer-content contacts-list">
-      <ion-item *ngFor="let message of messages" class="messages">
-        <h3>{{message.subject ? message.subject : message.campaign_name ? message.campaign_name : "No subject"}}</h3>
+      <ion-item *ngFor="let message of messages" class="messages" (click)="itemSelected(message)" text-wrap>
+        <h3>{{message.subject ? message.subject : message.campaign_name ? message.campaign_name : ""}}</h3>
         <p> {{message.name}}
             <span [hidden]="!message.company">, {{message.company}} </span>
         </p>
         <p [hidden]="!message.date"><ion-icon name="calendar"></ion-icon>
             {{message.date}}</p>
-        <ion-icon name="eye" item-right (click)="itemSelected(message)"></ion-icon>
+        <ion-icon name="eye" item-right></ion-icon>
       </ion-item>
     <div *ngIf="hideElement">
     <ion-card>

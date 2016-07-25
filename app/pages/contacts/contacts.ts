@@ -25,29 +25,10 @@ export class ContactsPage {
   contact = {id : 0};
 
   constructor(private nav: NavController, confData: ConferenceData,private userData: UserData) {
-    this.showLoader();
-
-    userData.getGroups().then(groups=>{
-    	let resultData;
-        resultData = groups;
-    	this.groups = resultData.user_groups;
-    	console.log(this.groups);
-    	userData.getCampaigns().then(campaigns=>{
-	    	let resultData;
-	        resultData = campaigns;
-	    	this.campaigns = resultData.campaigns;
-	    	this.hideLoader();
-    	});
-    });
+  
   }
 
   	onSearch(form){
-  		console.log(form);
-  		console.log(this.contact_search);
-  		console.log("-------------------------------");
-  		console.log(this.group_id);
-  		
-  		console.log(this.campaign_id);
   		this.showLoader();
   		this.userData.searchContacts(this.contact_search,this.group_id,this.campaign_id).then(contactData=>{
   			console.log("here in results");
@@ -139,7 +120,7 @@ export class ContactsPage {
   	editContact(contact_id){
 	  		console.log("Here in editContact");
 	    	this.nav.push(EditContactPage, {id:contact_id});
-	    	this.nav.setRoot(EditContactPage, {id:contact_id});
+	    	// this.nav.setRoot(EditContactPage, {id:contact_id});
 	    
 
   	}

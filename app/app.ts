@@ -56,7 +56,7 @@ class ConferenceApp {
     { title: 'Campaigns', component: CampaignPage, icon: 'calendar' },
   ];
   loggedInPages: PageObj[] = [
-    { title: 'Account', component: AccountPage, icon: 'person' },
+    // { title: 'Account', component: AccountPage, icon: 'person' },
     { title: 'Logout', component: LoginPage, icon: 'log-out' }
   ];
   loggedOutPages: PageObj[] = [

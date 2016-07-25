@@ -39,25 +39,8 @@ export class CampaignPage {
 
   changeStatus(id,status,$event) {
   	console.log("changeStatus is called!!")
-      console.log(status);
-  	let confirm = Alert.create({
-	      title: 'Confirm update',
-	      message: 'Do you really want to update status?',
-	      buttons: [
-	        {
-	          text: 'No',
-	          handler: () => {
-	          	
-	          	let oldstatus = !status;
-	          	console.log(document.getElementById(id.toString()));
-	          	console.log(id.toString())
-	          	 document.getElementById(id).setAttribute("checked",oldstatus.toString());
-	          }
-	        },
-	        {
-	          text: 'Yes',
-	          handler: () => {
-	            this.showLoader();
+    console.log(status);
+  	this.showLoader();
 			  	this.userData.updateCampaignStatus(id,status).then(result => {
 			  		let resultData;
 				        resultData = result;
@@ -74,11 +57,6 @@ export class CampaignPage {
 			        		this.nav.setRoot(LoginPage);
 				        }
 			  	})
-	          }
-	        }
-	      ]
-	    });
-	    this.nav.present(confirm);
   }
 
 
