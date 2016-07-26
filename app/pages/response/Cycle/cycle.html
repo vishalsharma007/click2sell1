@@ -14,7 +14,7 @@
         <ion-input [(ngModel)]="responseData.added_contacts" ngControl="added_contacts" type="text"></ion-input>
         <ion-input [hidden]="true" [(ngModel)]="responseData.user_contact_id" ngControl="user_contact_id" type="text"></ion-input>
         <ion-input [hidden]="true" [(ngModel)]="responseData.account_id" ngControl="account_id" type="text"></ion-input>
-        <ion-input [hidden]="true" [(ngModel)]="responseData.response" ngControl="response" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.action_name" ngControl="response" type="text"></ion-input>
         <ion-input [hidden]="true" [(ngModel)]="responseData.account_zone" ngControl="account_zone" type="text"></ion-input>
         <ion-input [hidden]="true" [(ngModel)]="responseData.date" ngControl="date" type="text"></ion-input>
         <ion-input [hidden]="true" [(ngModel)]="responseData.user_domain" ngControl="user_domain" type="text"></ion-input>
@@ -22,30 +22,30 @@
     </ion-item>
     <ion-card>
         <ion-card-content>
-            <ion-list radio-group>
+            <ion-list radio-group [(ngModel)]="responseData.response">
             <ion-item>
                 <ion-label>1 Month</ion-label>
-                <ion-radio value="1" checked></ion-radio>
+                <ion-radio value="1" (click)="onChanges('1')"></ion-radio>
             </ion-item>
             <ion-item>
                 <ion-label>2 Month</ion-label>
-                <ion-radio value="2"></ion-radio>
+                <ion-radio value="2" (click)="onChanges('2')"></ion-radio>
             </ion-item>
             <ion-item>
                 <ion-label>3 Month</ion-label>
-                <ion-radio value="3"></ion-radio>
+                <ion-radio value="3" (click)="onChanges('3')"></ion-radio>
             </ion-item>
              <ion-item>
                 <ion-label>6 Month</ion-label>
-                <ion-radio value="6"></ion-radio>
+                <ion-radio value="6" (click)="onChanges('6')"></ion-radio>
              </ion-item>
              <ion-item>
                <ion-label>9 Month</ion-label>
-               <ion-radio value="9"></ion-radio>
+               <ion-radio value="9" (click)="onChanges('9')"></ion-radio>
              </ion-item>
              <ion-item>
                 <ion-label>12 Month</ion-label>
-                <ion-radio value="12"></ion-radio>
+                <ion-radio value="12" (click)="onChanges('12')"></ion-radio>
              </ion-item>
             </ion-list>
         </ion-card-content>
@@ -57,8 +57,8 @@
         <ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
     </ion-item>
     <div padding>
-        <button (click)="onSend(meetingForm)" type="submit" primary block>Send</button>
-        <button (click)="onSend(meetingForm)" type="submit" primary block>Update</button>
+        <button (click)="onSend(responseData)" type="submit" primary block>Send</button>
+        <button (click)="onUpdate(responseData)" type="submit" primary block>Update</button>
     </div>
     </form>
 </ion-content>

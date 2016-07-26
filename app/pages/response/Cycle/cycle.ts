@@ -21,7 +21,33 @@ export class cycle{
             this.hideLoader();
         });
     }
+    onSend(data){
+//        this.showLoader();
+        let alert = Alert.create({
+            title: 'Success',
+            subTitle: 'Request successfully processed!',
+            buttons: ['OK']
+        });
+        let error = Alert.create({
+            title: 'Success',
+            subTitle: 'Error !!',
+            buttons: ['OK']
+        });
+        data.action_name = data.response;
+        this.confData.sendResponseData(data,'','','','').then(response =>{
+            console.log("---------response-----------");
+            console.log(response);
 
+//            this.hideLoader();
+
+//            let status = response['status'];
+//            if(status == '200'){
+//                this.nav.present(alert);
+//            }else{
+//                this.nav.present(error);
+//            }
+        });
+    }
 
     showLoader(){
         this.loading = Loading.create({

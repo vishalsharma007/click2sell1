@@ -38,8 +38,8 @@ export class inActive{
             buttons: ['OK']
         });
         let error = Alert.create({
-            title: 'Success',
-            subTitle: 'Error !!',
+            title: 'Error !!',
+            subTitle: 'Server Error.. !!',
             buttons: ['OK']
         });
         this.confData.sendResponseData(data,'','','','').then(response =>{
@@ -62,8 +62,8 @@ export class inActive{
             buttons: ['OK']
         });
         let error = Alert.create({
-            title: 'Success',
-            subTitle: 'Error !!',
+            title: 'Error !!',
+            subTitle: 'Server Error.. !!',
             buttons: ['OK']
         });
         this.confData.sendResponseData(data,'','','','update').then(response =>{

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Events, LocalStorage, Storage } from 'ionic-angular';
+import { Events, LocalStorage, Storage , Loading } from 'ionic-angular';
 import { Headers, RequestOptions,Request,Response,RequestMethod,URLSearchParams } from '@angular/http';
 import 'rxjs/Rx';
 
@@ -412,6 +412,13 @@ export class UserData {
             params.set('mess_subject', form.mess_subject);
             params.set('email_message', form.email_message);
             params.set('other_reason', form.action_name == 'other' ? form.other_reason : '');
+            params.set('check_sch_follow_1', form.check_sch_follow_1);
+            params.set('signature_for_email', form.signature_for_email);
+            params.set('date_follow', form.date_follow);
+            params.set('preview_follow_up_message_1', form.preview_follow_up_message_1);
+            params.set('preview_follow_up_message_2', form.preview_follow_up_message_2);
+            params.set('preview_follow_up_message_3', form.preview_follow_up_message_3);
+            params.set('future_subject', form.future_subject);
 
 
             this.headers = new Headers();

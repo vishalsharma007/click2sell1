@@ -19,18 +19,36 @@
         <ion-input [hidden]="true" [(ngModel)]="responseData.date" ngControl="date" type="text"></ion-input>
         <ion-input [hidden]="true" [(ngModel)]="responseData.user_domain" ngControl="user_domain" type="text"></ion-input>
         <ion-input [hidden]="true" [(ngModel)]="responseData.action_name" ngControl="action_name" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.check_sch_follow_1" ngControl="check_sch_follow_1" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.signature_for_email" ngControl="signature_for_email" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
+        <ion-input [hidden]="true" [(ngModel)]="responseData.future_subject" ngControl="future_subject" type="text"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Date</ion-label>
-        <ion-datetime  [(ngModel)]="responseData.start_date" displayFormat="MM-DD-YYYY"></ion-datetime>
+        <ion-datetime  [(ngModel)]="responseData.date_follow" displayFormat="MM-DD-YYYY" ngControl="date_follow" required></ion-datetime>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="message_index == 2 ||  message_index == 3 || message_index > 3">
         <ion-label fixed>Message</ion-label>
-        <ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
+        <ion-input [(ngModel)]="responseData.preview_follow_up_message_1" ngControl="preview_follow_up_message_1" type="text"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="message_index == 1 || message_index == 3 || message_index > 3">
+        <ion-label fixed>Message</ion-label>
+        <ion-input [(ngModel)]="responseData.preview_follow_up_message_2" ngControl="preview_follow_up_message_2" type="text"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="message_index == 2 || message_index == 1">
+        <ion-label fixed>Message</ion-label>
+        <ion-input [(ngModel)]="responseData.preview_follow_up_message_3" ngControl="preview_follow_up_message_3" type="text"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="message_index > 1">
+        <ion-label>Use Text for follow up 2 and 3</ion-label>
+        <ion-checkbox dark checked="{{sendSameForm}}" (click)="onCheckClick(sendSameForm)"></ion-checkbox>
     </ion-item>
     <div padding>
-      <button (click)="onSend(followForm)" type="submit" primary block>Send</button>
-      <button (click)="onSend(followForm)" type="submit" primary block>Update</button>
+      <button [hidden]="!sendSameForm" (click)="onSend(responseData)" type="submit" primary block>Send</button>
+      <button [hidden]="sendSameForm || message_index == 3" (click)="onNext(responseData)" type="submit" primary block>Next</button>
+      <button [hidden]="showNextUpdate || message_index == 1" (click)="onPrevious(responseData)" type="submit" primary block>Previous</button>
+      <button [hidden]="!message_index == 3 || message_index == 1" (click)="onSend(responseData)" type="submit" primary block>OK</button>
     </div>
     </form>
 </ion-content>
