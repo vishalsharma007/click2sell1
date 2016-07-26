@@ -54,7 +54,7 @@ export class MessageDetail{
         console.log(messageDetail);
         if(messageDetail.new_user == true){
             //Todo: the api is not give for noMatch response page...
-            this.nav.push(noMatch, {user_contact_id: messageDetail.user_contact_id,type: 'no_match'});
+            this.nav.push(noMatch, {message: messageDetail.message,type: 'no_match'});
         }else{
             let alert = Alert.create();
             alert.setTitle('Select Response');

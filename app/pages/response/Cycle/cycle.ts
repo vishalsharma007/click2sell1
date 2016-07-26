@@ -8,6 +8,7 @@ import { UserData } from '../../../providers/user-data';
 export class cycle{
     responseData = {};
     loading;
+    duration: boolean = false;
     constructor(private navParams: NavParams,private nav: NavController, private confData: UserData){
         console.log('response from meeting ......');
         console.log(navParams.data);
@@ -21,16 +22,23 @@ export class cycle{
             this.hideLoader();
         });
     }
-    onSend(data){
-//        this.showLoader();
+    onSend(){
+     this.duration = true;
+    }
+    onUpdate(){
+        this.duration = true;
+    }
+
+    confirmButton(data){
+        this.showLoader();
         let alert = Alert.create({
             title: 'Success',
             subTitle: 'Request successfully processed!',
             buttons: ['OK']
         });
         let error = Alert.create({
-            title: 'Success',
-            subTitle: 'Error !!',
+            title: 'Error !!',
+            subTitle: 'Server Error.. !!',
             buttons: ['OK']
         });
         data.action_name = data.response;
@@ -38,14 +46,14 @@ export class cycle{
             console.log("---------response-----------");
             console.log(response);
 
-//            this.hideLoader();
+            this.hideLoader();
 
-//            let status = response['status'];
-//            if(status == '200'){
-//                this.nav.present(alert);
-//            }else{
-//                this.nav.present(error);
-//            }
+            let status = response['status'];
+            if(status == '200'){
+                this.nav.present(alert);
+            }else{
+                this.nav.present(error);
+            }
         });
     }
 

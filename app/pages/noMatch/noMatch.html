@@ -3,14 +3,34 @@
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>NO Match </ion-title>
+        <ion-title>No Match Action</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content contacts-list">
+  <form #noMatchForm="ngForm" novalidate>
     <ion-card>
         <ion-card-header>
-            <h1>No Match</h1>
+            <h3>Message From</h3>
         </ion-card-header>
+        <ion-card-content>
+            <p><b>Name : </b>{{responseData.message}}</p>
+            <p><b>Email : </b>{{responseData.email}}</p>
+        </ion-card-content>
     </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <ion-list radio-group>
+            <ion-item *ngFor="let contact of responseData.user_contacts" class="contacts">
+                <ion-label>{{contact.email}}</ion-label>
+                <ion-radio value="{{contact.user_contact_id}}" (click)="onChanges(contact)"></ion-radio>
+            </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <div padding>
+        <button (click)="sendSelect()" type="submit" primary block>Select</button>
+        <button (click)="addNewContact()" type="submit" primary block>Add Contact</button>
+    </div>
+  </form>
 </ion-content>

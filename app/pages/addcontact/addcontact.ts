@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController,Alert,Loading } from 'ionic-angular';
+import { NavController,Alert,Loading,NavParams } from 'ionic-angular';
 
 import { MessagesPage } from '../messages/messages';
 import { UserData } from '../../providers/user-data';
@@ -10,17 +10,20 @@ import { UserData } from '../../providers/user-data';
   templateUrl: 'build/pages/addcontact/addcontact.html'
 })
 export class AddContactPage {
-  contact: {firstname?: string, lastname?: string} = {firstname : ''};
+  contact: {firstname?: string, lastname?: string ,email?: string} = {firstname : ''};
   submitted = false;
   groups;
   loading;
   contact_group = '';
-  constructor(private nav: NavController, private userData: UserData) {
+  constructor(private nav: NavController, private userData: UserData, private params: NavParams) {
+      console.log('*********Params********');
+      console.log(this.params.data.email);
     userData.getGroups().then(groups=>{
       let resultData;
       resultData = groups;
       console.log(resultData);
       this.groups = resultData.user_groups;
+      this.params.data.email ? this.contact.email = this.params.data.email : '';
       console.log(this.groups);
     });
   }

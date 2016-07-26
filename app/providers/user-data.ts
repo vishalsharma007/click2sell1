@@ -295,7 +295,35 @@ export class UserData {
             });
         })
     }
+    sendNoMatchContact(data){
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('id', data.user_contact_id);
+        params.set('user_email', data.email);
 
+        return this.getToken().then((userdata) => {
+            let data = JSON.parse(userdata);
+            let token = data.api_token;
+            this.headers = new Headers();
+            this.headers.append('apicall',  'true');
+            this.headers.append('Authorization','Token token='+token);
+            console.log(this.headers);
+            let options = new RequestOptions({
+                method: RequestMethod.Post,
+                url: 'https://dev.click2sell.com/messages_api/user_selected_api.json',
+                headers: this.headers,
+                search: params
+            });
+
+            return new Promise(resolve => {
+                this.http.request(new Request(options))
+                    .subscribe(res => {
+                        // we've got back the raw data, now generate the core schedule data
+                        // and save the data for later reference
+                        resolve(res.json());
+                    });
+            });
+        })
+    }
     getMeetingDetail(id){
         let params: URLSearchParams = new URLSearchParams();
         params.set('id', id);
@@ -329,7 +357,8 @@ export class UserData {
         params.set('template_name', template_name);
         console.log("*************** name of templet in api :::");
         console.log(template_name);
-        let url =  (template_name == 'forward') ? 'https://dev.click2sell.com/messages_api/forward_message.json' : 'https://dev.click2sell.com/user_contacts/find_template_api.json';
+        let url =  (template_name == 'forward') ? 'https://dev.click2sell.com/messages_api/forward_message.json' : (template_name == 'no_match') ? 'https://dev.click2sell.com/messages_api/get_new_user_message.json': 'https://dev.click2sell.com/user_contacts/find_template_api.json';
+        console.log(url);
         params.set('template_type', "response");
         return this.getToken().then((userdata) => {
             let data = JSON.parse(userdata);
@@ -419,6 +448,9 @@ export class UserData {
             params.set('preview_follow_up_message_2', form.preview_follow_up_message_2);
             params.set('preview_follow_up_message_3', form.preview_follow_up_message_3);
             params.set('future_subject', form.future_subject);
+            params.set('preview_email_message', form.preview_email_message);
+            params.set('quick_response', form.quick_response);
+            params.set('quick_response2', form.quick_response2);
 
 
             this.headers = new Headers();
