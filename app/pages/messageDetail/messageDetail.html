@@ -21,14 +21,18 @@
     </button> --> 
 
 <ion-card *ngFor="let message of messageDetail.conversation">
-    <ion-card-header [hidden]="!message.subject">
-        <h3 item-left [hidden]="!message.subject">{{message.subject}}</h3>
-        <p [hidden]="!message.from"><b>From:</b> {{message.from}}</p>
-        <p [hidden]="!message.to" (click)="goContactSearchPage(message.to)"><b>To:</b> {{message.to}} </p>
-        <p [hidden]="!message.date"><ion-icon name="calendar"></ion-icon> {{message.date}}</p>
-    </ion-card-header>
+    <!--<ion-card-header [hidden]="!message.subject">-->
+        <!--<h3 item-left [hidden]="!message.subject">{{#message.subject}}</h3>-->
+    <!--</ion-card-header>-->
+    <ion-card-content [hidden]="!message.content" text-wrap>
+    <div [hidden]="!message.subject">
+    <h3 item-left [hidden]="!message.subject">{{message.subject}}</h3>
+    <p [hidden]="!message.from"><b>From:</b> {{message.from}}</p>
+    <p [hidden]="!message.to" (click)="goContactSearchPage(message.to)"><b>To:</b> {{message.to}} </p>
+    <p [hidden]="!message.date"><ion-icon name="calendar"></ion-icon> {{message.date}}</p>
+
     <hr/>
-    <ion-card-content [hidden]="!message.content">
+    </div>
        <p>{{message.content}}</p>
       <!--  <p [hidded]="!message.updated_at"><ion-icon name="calendar"></ion-icon> {{message.updated_at}} </p>
  -->    </ion-card-content>

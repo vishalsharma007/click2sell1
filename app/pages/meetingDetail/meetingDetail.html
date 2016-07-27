@@ -17,17 +17,17 @@
     <ion-title>Response</ion-title>
     </button> -->
     <ion-card>
-    <ion-card-header>
-        <h3 item-left>{{meetingDetail.name}}</h3>
-        <p>{{meetingDetail.company}}</p>
-        <p>{{meetingDetail.primary_email}} </p>
-        <p>{{meetingDetail.primary_phone_number}}</p>
-        <p>{{meetingDetail.current_reply_action}}</p>
-        <p><ion-icon name="calendar"></ion-icon> {{meetingDetail.meeting_date}}</p>
-        <p><ion-icon name="calendar"></ion-icon> {{meetingDetail.next_email_date}}</p>
-    </ion-card-header>
-    <hr/>
-    <ion-card-content>
+    <ion-card-content text-wrap>
+        <div>
+            <h3 item-left>{{meetingDetail.name}}</h3>
+            <p>{{meetingDetail.company}}</p>
+            <p>{{meetingDetail.primary_email}} </p>
+            <p>{{meetingDetail.primary_phone_number}}</p>
+            <p>{{meetingDetail.current_reply_action}}</p>
+            <p><ion-icon name="calendar"></ion-icon> {{meetingDetail.meeting_date}}</p>
+            <p><ion-icon name="calendar"></ion-icon> {{meetingDetail.next_email_date}}</p>
+        </div>
+        <hr/>
         <p>{{meetingDetail.notes}}</p>
         <p>{{meetingDetail.message}}</p>
     </ion-card-content>
