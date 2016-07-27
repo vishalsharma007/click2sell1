@@ -63,13 +63,10 @@ export class EditContactPage {
    
   }
 
-  onUpdate(form,contact_group) { 
-    console.log(form);
-    console.log(contact_group);
-    console.log("here onUpdate!!");
+  onUpdate(form) { 
     console.log("this.contact_group");
-    console.log(contact_group);
-    // console.log(this.contact.id);
+    // console.log(form);
+    console.log(this.contact_group);
     this.submitted = true;
     if (form.valid) {
       this.showLoader();
