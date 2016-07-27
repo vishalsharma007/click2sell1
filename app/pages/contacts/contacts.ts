@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionSheet, NavController,Loading, Page,Alert } from 'ionic-angular';
+import {NavParams, ActionSheet, NavController,Loading, Page,Alert } from 'ionic-angular';
 
 import { ConferenceData } from '../../providers/conference-data';
 
@@ -19,13 +19,20 @@ export class ContactsPage {
   campaigns;
   groups;
   loading;
+  hideSearch = true;
   campaign_id = '';
   group_id = '';
   contact_search = '';
-  contact = {id : 0};
-
-  constructor(private nav: NavController, confData: ConferenceData,private userData: UserData) {
-  
+  contact = {id : 0,vip:true}; 
+  showBack = false;
+  // vip_true=true;
+  // vip_false=false;
+  constructor(private nav: NavController, confData: ConferenceData,private userData: UserData,private NavParams:NavParams) {
+  	let email = NavParams.get("email");
+  		if(email !==undefined){
+  			email = email.split("<");
+  			this.contact_search = email[0];
+  		}		
   }
 
   	onSearch(form){
@@ -34,6 +41,7 @@ export class ContactsPage {
   			console.log("here in results");
   			setTimeout(() => {
 				this.hideLoader();
+				this.hideSearch = false;
 		     }, 1000);
 	    	let resultData;
 	        resultData = contactData;
@@ -52,10 +60,33 @@ export class ContactsPage {
 	        	this.userData.logout();
 	        	this.nav.push(LoginPage);
         		this.nav.setRoot(LoginPage);
-	        }	    	
+	        }	
+
     	});
   	}
-
+  	showSearch(){
+  		console.log("showSearch clicked");
+  		this.hideSearch= !this.hideSearch;
+  		this.contacts = [];
+  	}
+  	changeVipStatus(user_id){
+  		console.log(user_id);
+  		console.log("bablu");
+  		this.showLoader();
+  		this.userData.changeVip(user_id).then(vipData=>{
+  				console.log("qeqeqeqeqeqweqweqeq");
+  				console.log(vipData['mesage'].replace(/\"/g, ""));
+  				let trueData = "User contact has been marked as vip."
+  				console.log(vipData['mesage'].replace(/\"/g, "") == trueData)
+  				// console.log(this.contact);
+  				// vipData['mesage'].replace(/\"/g, "") == trueData ? this.vip_true = true : this.vip_false = false;
+  				// console.log("this.vip_true");
+  				// console.log(this.vip_true);
+  				// console.log("this.vip_false");
+  				// console.log(this.vip_false);
+  			this.hideLoader();
+  		});
+  	}
   	showOption(contact_id){
 	    let alert = Alert.create();
 	    alert.setTitle('Select Response');

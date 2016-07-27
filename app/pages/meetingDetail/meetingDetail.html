@@ -4,14 +4,18 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Meeting</ion-title>
-
+          <ion-buttons end>
+          <button  (click)="showOption(messageDetail);"> Response
+            <ion-icon ios="ios-send" md="md-send"></ion-icon>
+          </button>
+    </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content contacts-list">
-    <button type="submit" class="button button-block button-positive" (click)="showOption(1);">
+    <!-- <button type="submit" class="button button-block button-positive" (click)="showOption(1);">
     <ion-title>Response</ion-title>
-    </button>
+    </button> -->
     <ion-card>
     <ion-card-header>
         <h3 item-left>{{meetingDetail.name}}</h3>

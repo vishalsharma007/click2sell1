@@ -3,6 +3,7 @@ import { NavParams,ActionSheet,Loading, NavController, Page,Alert } from 'ionic-
 import { UserData } from '../../providers/user-data';
 import { Meeting } from '../response/meeting/meeting';
 import { noMatch } from '../noMatch/noMatch';
+import {ContactsPage} from '../contacts/contacts';
 
 @Component({
     templateUrl: 'build/pages/messageDetail/messageDetail.html'
@@ -12,6 +13,7 @@ export class MessageDetail{
 
     loading;
     messageDetail = [];
+    email;
     constructor(private nav: NavController,private navParams: NavParams , private confData: UserData){
         let message_id = this.navParams.data.messageId;
         this.showLoader();
@@ -27,6 +29,11 @@ export class MessageDetail{
         }
 
     }
+
+        goContactSearchPage(a){
+            console.log(a);
+            this.nav.push(ContactsPage,{email: a});
+        }
     showLoader(){
         this.loading = Loading.create({
             content: 'Please wait...'

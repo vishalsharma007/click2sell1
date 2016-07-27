@@ -8,18 +8,20 @@
 </ion-header>
 <ion-content class="outer-content contacts-list">
   <form #contactForm="ngForm" novalidate>
-    <ion-item>
+    <ion-item [hidden]="!hideSearch">
       <ion-label>Enter Keyword</ion-label>
         <ion-input [(ngModel)]="contact_search" type="text"></ion-input>
       </ion-item>
       <ion-row responsive-sm>
         <ion-col>
-          <button (click)="onSearch(contactForm)" type="submit" primary block>Search</button>
-        <!--button (click)="clearSearch(contactForm)" type="button" primary medium round>Clear</button-->
+          <button [hidden]="!hideSearch" (click)="onSearch(contactForm)" type="submit" primary block>Search</button>
+
+         <button [hidden]="hideSearch" type="button" (click)="showSearch()" primary block>
+         <ion-icon name="arrow-back"></ion-icon>
+         Back  To Search </button>
         </ion-col>
       </ion-row>
   </form>
-
     <ion-item *ngFor="let contact of contacts" class="contacts" text-wrap>
       <h2>{{contact.firstname}} {{contact.lastname}}</h2>
         <p [hidden]="!contact.company">{{contact.company}}</p>
@@ -27,9 +29,12 @@
         <p [hidden]="!contact.title">{{contact.title}}</p>
         <p [hidden]="!contact.campaign"> {{contact.campaign}}</p>
 
-      <button small secondary [hidden]="contact.vip != true">
-      <ion-icon name="person"></ion-icon>Vip</button>
-      <button small danger [hidden]="contact.vip != false"><ion-icon name="person"></ion-icon>Vip</button>
+      <button small secondary [hidden]="contact.vip != true" (click)="changeVipStatus(contact.id)">
+        <ion-icon name="person"></ion-icon>Vip
+      </button>
+      <button small danger [hidden]="contact.vip != false" (click)="changeVipStatus(contact.id)">
+        <ion-icon name="person"></ion-icon>Vip
+      </button>
       <button [hidden]="contact.status != 'Active'" small secondary>{{contact.status}}</button>
       <button [hidden]="contact.status == 'Active'" small danger>{{contact.status}}</button>
       <button class= "button button-assertive" (click)="editContact(contact.id)">

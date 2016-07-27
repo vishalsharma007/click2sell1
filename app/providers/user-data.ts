@@ -469,7 +469,40 @@ export class UserData {
     });          
   } 
 
+  changeVip(user_id){
+    console.log("changeVipStatus is called");
+    console.log(user_id); 
+    // return {user_id: "abablu"};
 
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('id', user_id);
+      return this.getToken().then((userdata) => { 
+      let data = JSON.parse(userdata);
+      let token = data.api_token;
+      console.log("token");
+      console.log(token);
+      this.headers = new Headers();
+      this.headers.append('apicall',  'true');
+      this.headers.append('Authorization','Token token='+token);
+      console.log(this.headers);
+      console.log(params);
+      let options = new RequestOptions({
+          method: RequestMethod.Get,
+          url: 'https://dev.click2sell.com/user_contacts/change_vip_status.json',
+          headers: this.headers,
+          search : params
+      });
+
+      return new Promise(resolve => {
+        this.http.request(new Request(options))
+        .subscribe(res => {
+        // we've got back the raw data, now generate the core schedule data
+        // and save the data for later reference
+        resolve(res.json());
+        });
+      });
+    });          
+  }
 
 }
 

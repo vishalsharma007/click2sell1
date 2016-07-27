@@ -3,27 +3,35 @@
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Message</ion-title>
+        <ion-title side="left">Message</ion-title>
+        <!-- <ion-title align-title="left">Response <ion-icon ios="ios-send" md="md-send"></ion-icon></ion-title> -->
+         <ion-buttons end>
+          <button  (click)="showOption(messageDetail);"> Response
+            <ion-icon ios="ios-send" md="md-send"></ion-icon>
+          </button>
+    </ion-buttons>
+
     </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content contacts-list">
-    <button type="submit" class="button button-block button-positive" (click)="showOption(messageDetail);">
-        <!-- <ion-icon ios="ios-send" md="md-send"></ion-icon> -->
+   <!--  <button type="submit" class="button button-block button-positive" (click)="showOption(messageDetail);">
+        <!-- <ion-icon ios="ios-send" md="md-send"></ion-icon>
         <ion-title>Response</ion-title>
-    </button>
+    </button> --> 
 
 <ion-card *ngFor="let message of messageDetail.conversation">
-    <ion-card-header>
-        <h3 item-left>{{message.subject}}</h3>
-        <p><b>From:</b> {{message.from}}</p>
-        <p><b>To:</b> {{message.to}} </p>
+    <ion-card-header [hedden]="!message.subject">
+        <h3 item-left [hidden]="!message.subject">{{message.subject}}</h3>
+        <p [hidden]="!message.from"><b>From:</b> {{message.from}}</p>
+        <p [hidden]="!message.to" (click)="goContactSearchPage(message.to)"><b>To:</b> {{message.to}} </p>
         <p [hidden]="!message.date"><ion-icon name="calendar"></ion-icon> {{message.date}}</p>
     </ion-card-header>
     <hr/>
-    <ion-card-content>
+    <ion-card-content [hidden]="!message.content">
        <p>{{message.content}}</p>
-    </ion-card-content>
+      <!--  <p [hidded]="!message.updated_at"><ion-icon name="calendar"></ion-icon> {{message.updated_at}} </p>
+ -->    </ion-card-content>
 
 </ion-card>
 

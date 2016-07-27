@@ -25,6 +25,7 @@ export class EditContactPage {
       resultData = groups;
       this.groups = resultData.user_groups;
        // console.log(this.groups)
+      console.log("this.groups");
       console.log(this.groups);
       this.showLoader();
       userData.getUserDetails(this.contactid).then(details=>{
@@ -51,7 +52,7 @@ export class EditContactPage {
            this.groups.user_group = resultData.user_contact_group_name;
            console.log(this.groups.user_group)
         this.contact = resultData.user_contact;
-        // this.groups = resultData.user_contact_group_name;
+        this.contact_group = resultData.user_contact_group_name;
         this.hideLoader();
         console.log(resultData);   
         // this.contact.id=contactid;
@@ -62,10 +63,12 @@ export class EditContactPage {
    
   }
 
-  onUpdate(form) { 
+  onUpdate(form,contact_group) { 
     console.log(form);
-    console.log(this.contact_group)
+    console.log(contact_group);
     console.log("here onUpdate!!");
+    console.log("this.contact_group");
+    console.log(contact_group);
     // console.log(this.contact.id);
     this.submitted = true;
     if (form.valid) {

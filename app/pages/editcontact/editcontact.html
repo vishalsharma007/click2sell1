@@ -13,16 +13,10 @@
     <form #contactForm="ngForm" novalidate>
       <ion-item>
         <ion-label>Select Group</ion-label>
-        <ion-select [(ngModel)]="contact_group" ngControl="group" placeholder="Group" #group="ngForm" required>
-        {{groups}}
-          <ion-option *ngFor="let group of groups"  value="{{group.user_group}}">{{group.user_group}}</ion-option>
-        }
-        }
+        <ion-select  [ngModel]="contact_group" ngControl="groups" required>
+          <ion-option *ngFor="let group of groups">{{group.user_group}}</ion-option>
         </ion-select>
       </ion-item>
-      <p [hidden]="group.valid || submitted == false" danger padding-left>
-        Group is required
-      </p>
       <ion-item>
         <ion-label floating primary>First name</ion-label>
         <ion-input [(ngModel)]="contact.firstname" ngControl="firstname" type="text">
@@ -82,7 +76,7 @@
         </ion-input>
       </ion-item>
       <div padding>
-        <button (click)="onUpdate(contactForm)" type="submit" primary block>Update</button>
+        <button (click)="onUpdate(contactForm,contact_group)" type="submit" primary block>Update</button>
       </div>
     </form>
   </ion-list>
