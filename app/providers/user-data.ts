@@ -299,7 +299,7 @@ export class UserData {
         let params: URLSearchParams = new URLSearchParams();
         params.set('id', message_id);
         params.set('user_email', data.email);
-       let url = 'id='+message_id+'&user_email='+data.email;
+       //let url = 'id='+message_id+'&user_email='+data.email;
 //        decodeURI(url);
         return this.getToken().then((userdata) => {
             let data = JSON.parse(userdata);
@@ -312,7 +312,7 @@ export class UserData {
                 method: RequestMethod.Post,
                 url: 'https://dev.click2sell.com/messages_api/user_selected_api.json',
                 headers: this.headers,
-                search: decodeURI(url)
+                search: params
             });
 
             return new Promise(resolve => {
