@@ -20,7 +20,7 @@ export class MeetingDetail{
     meetingDetail = [];
     constructor(private nav: NavController,private navParams: NavParams , private confData: UserData){
         let meeting_id = this.navParams.data.messageId;
-        //this.showLoader();
+        this.showLoader();
         console.log("data of meeting:::: ",meeting_id);
         if(meeting_id){
             this.confData.getMeetingDetail(meeting_id).then(res => {
@@ -28,7 +28,7 @@ export class MeetingDetail{
                 resultData = res;
                 this.meetingDetail = resultData;
                 console.log(resultData);
-                //this.hideLoader();
+                this.hideLoader();
             });
         }
 

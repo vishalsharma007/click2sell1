@@ -25,6 +25,7 @@ export class EditContactPage {
       resultData = groups;
       this.groups = resultData.user_groups;
        // console.log(this.groups)
+      console.log("this.groups");
       console.log(this.groups);
       this.showLoader();
       userData.getUserDetails(this.contactid).then(details=>{
@@ -51,7 +52,7 @@ export class EditContactPage {
            this.groups.user_group = resultData.user_contact_group_name;
            console.log(this.groups.user_group)
         this.contact = resultData.user_contact;
-        // this.groups = resultData.user_contact_group_name;
+        this.contact_group = resultData.user_contact_group_name;
         this.hideLoader();
         console.log(resultData);   
         // this.contact.id=contactid;
@@ -63,10 +64,9 @@ export class EditContactPage {
   }
 
   onUpdate(form) { 
-    console.log(form);
-    console.log(this.contact_group)
-    console.log("here onUpdate!!");
-    // console.log(this.contact.id);
+    console.log("this.contact_group");
+    // console.log(form);
+    console.log(this.contact_group);
     this.submitted = true;
     if (form.valid) {
       this.showLoader();
@@ -78,16 +78,13 @@ export class EditContactPage {
         console.log(resultData);
         this.hideLoader();
         if(resultData.status == 200){
-
-        // this.doAlert("Information","Successfully updated");
-
-
-          this.nav.pop();
+            console.log("Sucess on update ::");
+            this.nav.pop();
 
         }else if(resultData.status == 201 && resultData.error){
             this.doAlert("Information","Please select an existing Group or add a new Group");
-          }else if(resultData.status == 500){
-            this.doAlert("Error","Your email Id contain special character!!");
+          }else if(resultData.status == 500 || resultData.error == 500){
+            this.doAlert("Error","Invalid Email ID!!");
           }
 
           else{
@@ -101,7 +98,7 @@ export class EditContactPage {
 
   showLoader(){
       this.loading = Loading.create({
-        content: 'Please wait...',
+        content: 'Please wait...'
       });
       console.log("here in load");
       this.nav.present(this.loading);

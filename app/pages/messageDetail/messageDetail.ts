@@ -10,6 +10,7 @@ import { inActive } from '../response/inActive/inActive';
 import { conversation } from '../response/conversation/conversation';
 
 import { noMatch } from '../noMatch/noMatch';
+import {ContactsPage} from '../contacts/contacts';
 
 
 
@@ -20,6 +21,7 @@ import { noMatch } from '../noMatch/noMatch';
 export class MessageDetail{
     loading;
     messageDetail = [];
+    email;
     constructor(private nav: NavController,private navParams: NavParams , private confData: UserData){
         let message_id = this.navParams.data.messageId;
         this.showLoader();
@@ -34,6 +36,11 @@ export class MessageDetail{
             });
         }
 
+    }
+
+    goContactSearchPage(a){
+        console.log(a);
+        this.nav.push(ContactsPage,{email: a});
     }
     showLoader(){
         this.loading = Loading.create({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionSheet, NavController,Loading, Page,Alert } from 'ionic-angular';
+import {NavParams, ActionSheet, NavController,Loading, Page,Alert } from 'ionic-angular';
 
 import { ConferenceData } from '../../providers/conference-data';
 
@@ -27,47 +27,66 @@ export class ContactsPage {
   campaigns;
   groups;
   loading;
+  hideSearch = true;
   campaign_id = '';
   group_id = '';
   contact_search = '';
-  contact = {id : 0};
-
-  constructor(private nav: NavController, confData: ConferenceData,private userData: UserData) {
-  
+  contact = {id : 0,vip:true}; 
+  showBack = false;
+  // vip_true=true;
+  // vip_false=false;
+  constructor(private nav: NavController, confData: ConferenceData,private userData: UserData,private NavParams:NavParams) {
+      console.log("calling from contac ::::");
+  	let email = NavParams.get("email");
+  		if(email !==undefined){
+  			email = email.split("<");
+  			this.contact_search = email[0];
+  		}		
   }
 
   	onSearch(form){
+  		console.log(form);
   		this.showLoader();
   		this.userData.searchContacts(this.contact_search,this.group_id,this.campaign_id).then(contactData=>{
   			console.log("here in results");
   			setTimeout(() => {
 				this.hideLoader();
+				this.hideSearch = false;
 		     }, 1000);
 	    	let resultData;
 	        resultData = contactData;
-	        console.log(resultData.status);
 	        if(resultData.status == 201){
 	        	this.contacts = [];
 	        	this.doAlert("Information","No results found");
 	        } else if(resultData.status == 200){
-	        	console.log("herer in else");
-	        	console.log(resultData.user_contacts);
 	        	this.contacts = resultData.user_contacts;
-	        	console.log("contact list");
-	        	console.log(this.contacts);
 	        }  else{
 	        	this.doAlert("Information","Access denied");
 	        	this.userData.logout();
 	        	this.nav.push(LoginPage);
         		this.nav.setRoot(LoginPage);
-	        }	    	
+	        }	
+
     	});
   	}
+  	showSearch(){
+  		console.log("showSearch clicked");
+  		this.hideSearch= !this.hideSearch;
+  		this.contacts = [];
+  	}
+  	changeVipStatus(user_id){
+  		console.log(user_id);
+  		console.log("bablu");
+  		this.showLoader();
+  		this.userData.changeVip(user_id).then(vipData=>{
 
+  				let trueData = "User contact has been marked as vip."
+  				console.log(vipData['mesage'].replace(/\"/g, "") == trueData)
+  			this.hideLoader();
+  		});
+  	}
+  	
   	showOption(contact){
-
-        console.log("********************");
-        console.log(contact);
         let alert = Alert.create();
         alert.setTitle('Select Response');
         alert.addInput({
@@ -175,8 +194,7 @@ export class ContactsPage {
   	editContact(contact_id){
 	  		console.log("Here in editContact");
 	    	this.nav.push(EditContactPage, {id:contact_id});
-	    	// this.nav.setRoot(EditContactPage, {id:contact_id});
-	    
+
 
   	}
   	onClear(form){
@@ -187,7 +205,7 @@ export class ContactsPage {
   	}
 	showLoader(){
 	    this.loading = Loading.create({
-	      content: 'Please wait...',
+	      content: 'Please wait...'
 	    });
 	    console.log("here in load");
 	    this.nav.present(this.loading);
