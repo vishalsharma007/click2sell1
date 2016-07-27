@@ -11,9 +11,12 @@ import { AddContactPage } from '../addcontact/addcontact';
 export class noMatch{
     responseData = {};
     selectedContact = {};
+    messageId;
     constructor(private navParams: NavParams,private nav: NavController,private confData: UserData){
         console.log('response from No Match ......');
         let messageDetail = navParams.data;
+        console.log(messageDetail);
+        this.messageId =  messageDetail.message;
         this.confData.getResponseDetail(messageDetail.message,messageDetail.type).then(res => {
             console.log('######---- response data from No Match ---- #######');
             console.log(res);
@@ -29,11 +32,27 @@ export class noMatch{
     }
 
     sendSelect(){
+        let alert = Alert.create({
+            title: 'Success',
+            subTitle: 'Request successfully processed!',
+            buttons: ['OK']
+        });
+        let error = Alert.create({
+            title: 'Error !!',
+            subTitle: 'Server Error.. !!',
+            buttons: ['OK']
+        });
       console.log("Send selected console data");
       console.log(this.selectedContact);
-        this.confData.sendNoMatchContact(this.selectedContact).then(res =>{
+        this.confData.sendNoMatchContact(this.messageId,this.selectedContact).then(res =>{
             console.log('******************');
             console.log(res);
+            let status = res['status'];
+            if(status == '200'){
+                this.nav.present(alert);
+            }else{
+                this.nav.present(error);
+            }
         });
     }
     addNewContact(){

@@ -15,6 +15,7 @@
 
 <ion-card *ngFor="let message of messageDetail.conversation">
     <ion-card-header>
+        <p><b>[{{messageDetail.new_user}}]</b></p>>
         <h3 item-left>{{message.subject}}</h3>
         <p><b>From:</b> {{message.from}}</p>
         <p><b>To:</b> {{message.to}} </p>

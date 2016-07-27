@@ -295,11 +295,12 @@ export class UserData {
             });
         })
     }
-    sendNoMatchContact(data){
+    sendNoMatchContact(message_id ,data){
         let params: URLSearchParams = new URLSearchParams();
-        params.set('id', data.user_contact_id);
+        params.set('id', message_id);
         params.set('user_email', data.email);
-
+       let url = 'id='+message_id+'&user_email='+data.email;
+//        decodeURI(url);
         return this.getToken().then((userdata) => {
             let data = JSON.parse(userdata);
             let token = data.api_token;
@@ -311,7 +312,7 @@ export class UserData {
                 method: RequestMethod.Post,
                 url: 'https://dev.click2sell.com/messages_api/user_selected_api.json',
                 headers: this.headers,
-                search: params
+                search: decodeURI(url)
             });
 
             return new Promise(resolve => {

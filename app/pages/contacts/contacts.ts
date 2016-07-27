@@ -9,6 +9,14 @@ import {EditContactPage} from '../editcontact/editcontact';
 
 import { LoginPage } from '../login/login';
 
+import { Meeting } from '../response/meeting/meeting';
+import { cycle } from '../response/Cycle/cycle';
+import { noAction } from '../response/noAction/noAction';
+import { follow } from '../response/follow/follow';
+import { remove } from '../response/remove/remove';
+import { inActive } from '../response/inActive/inActive';
+import { conversation } from '../response/conversation/conversation';
+
 @Component({
   templateUrl: 'build/pages/contacts/contacts.html'
 })
@@ -56,61 +64,108 @@ export class ContactsPage {
     	});
   	}
 
-  	showOption(contact_id){
-	    let alert = Alert.create();
-	    alert.setTitle('Select Response');
+  	showOption(contact){
 
-	    alert.addInput({
-	      type: 'radio',
-	      label: 'Meeting',
-	      value: '1',
-	      checked: true
-	    });
+        console.log("********************");
+        console.log(contact);
+        let alert = Alert.create();
+        alert.setTitle('Select Response');
+        alert.addInput({
+            type: 'radio',
+            label: 'Meeting',
+            value: 'meeting',
+            checked: true
+        });
 
-	    alert.addInput({
-	      type: 'radio',
-	      label: 'Cycle',
-	      value: '2',
-	    });
+        alert.addInput({
+            type: 'radio',
+            label: 'Cycle',
+            value: 'cycle'
+        });
 
-	    alert.addInput({
-	      type: 'radio',
-	      label: 'Follow Up',
-	      value: '3',
-	    });
+        alert.addInput({
+            type: 'radio',
+            label: 'Ok, I got it',
+            value: 'no_action'
+        });
 
-	    alert.addInput({
-	      type: 'radio',
-	      label: 'Inactive',
-	      value: '4',
-	    });
+        alert.addInput({
+            type: 'radio',
+            label: 'Inactive',
+            value: 'inactive'
+        });
 
-	    alert.addInput({
-	      type: 'radio',
-	      label: 'Remove',
-	      value: '5',
-	    });
+        alert.addInput({
+            type: 'radio',
+            label: 'Remove',
+            value: 'remove'
+        });
+        alert.addInput({
+            type: 'radio',
+            label: 'Forward',
+            value: 'forward'
+        });
+        alert.addInput({
+            type: 'radio',
+            label: 'Conversation',
+            value: 'conversation'
+        });
 
-	    alert.addInput({
-	      type: 'radio',
-	      label: 'Conversation',
-	      value: '6',
-	    });
+        alert.addButton('Cancel');
+        alert.addButton({
+            text: 'OK',
+            handler: data => {
+                console.log(data);
+                console.log(contact);
+                if (data == 'meeting') {
+                    this.nav.push(Meeting, {user_contact_id: contact.id, type: data});
+                } else if (data == 'cycle') {
+                    this.nav.push(cycle, {user_contact_id: contact.id, type: data});
+                } else if (data == 'no_action') {
+                    //this.nav.push(noAction , {user_contact_id: meetingDetail.user_contact_id,type: data});
+                    this.showLoader();
+                    let alert = Alert.create({
+                        title: 'Success',
+                        subTitle: 'Successfully Moved!',
+                        buttons: ['OK']
+                    });
 
-	    alert.addInput({
-	      type: 'radio',
-	      label: 'Enter Activity',
-	      value: '7',
-	    });
+                    this.userData.getResponseDetail(contact.id, data).then(res => {
+                        console.log('######---- response data No Action ---- #######');
+                        console.log(res);
+                        let data = res;
+                        this.hideLoader();
+                        this.nav.present(alert);
+                    });
+                } else if (data == 'inactive') {
+                    this.nav.push(inActive, {user_contact_id: contact.id, type: data});
+                } else if (data == 'remove') {
+                    this.nav.push(remove, {user_contact_id: contact.id, type: data});
+                } else if (data == 'conversation') {
+                    this.nav.push(conversation, {user_contact_id: contact.id, type: data});
 
-	    alert.addButton('Cancel');
-	    alert.addButton({
-	      text: 'OK',
-	      handler: data => {
-	      	console.log(data);
-	      	console.log(contact_id);
-	      }
-	    });
+                } else if (data == 'follow_up') {
+                    this.nav.push(follow, {user_contact_id: contact.id, type: data});
+                } else if (data == "forward") {
+
+                    this.showLoader();
+                    let alert = Alert.create({
+                        title: 'Success',
+                        subTitle: 'Request Successfully recorded.',
+                        buttons: ['OK']
+                    });
+
+                    this.userData.getResponseDetail(contact.id, data).then(res => {
+                        console.log('######---- response data No Action ---- #######');
+                        console.log(res);
+                        let data = res;
+                        this.hideLoader();
+                        this.nav.present(alert);
+                    });
+
+                }
+            }
+        });
 
 	    this.nav.present(alert);
 

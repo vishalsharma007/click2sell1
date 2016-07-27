@@ -53,7 +53,7 @@ export class MessageDetail{
         console.log("on click show option for response:::0");
         console.log(messageDetail);
         if(messageDetail.new_user == true){
-            //Todo: the api is not give for noMatch response page...
+
             this.nav.push(noMatch, {message: messageDetail.message,type: 'no_match'});
         }else{
             let alert = Alert.create();
