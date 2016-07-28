@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
+import {FORM_PROVIDERS, FORM_DIRECTIVES} from '@angular/common';
+
 import { NavParams,ActionSheet,Loading, NavController, Page,Alert } from 'ionic-angular';
 import { UserData } from '../../../providers/user-data';
 
+import {Editor} from 'primeng/primeng';
+import {Header} from 'primeng/primeng';
+
 @Component({
-    templateUrl: 'build/pages/response/conversation/conversation.html'
+    templateUrl: 'build/pages/response/conversation/conversation.html',
+    providers: [FORM_PROVIDERS],
+    directives: [FORM_DIRECTIVES,Editor]
 })
 export class conversation{
     loading;
@@ -19,6 +26,11 @@ export class conversation{
             let data = res;
             this.responseData = data;
             this.hideLoader();
+            setTimeout(function(){
+                console.log('+++++++++++++++++++++');
+                console.log(data['email_message']);
+                document.getElementById('ieditor').innerHTML= data['email_message'];
+            }, 1000);
         });
     }
 

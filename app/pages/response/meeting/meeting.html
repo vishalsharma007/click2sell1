@@ -40,10 +40,25 @@
         <ion-label fixed>Subject </ion-label>
         <ion-input [(ngModel)]="responseData.mess_subject" ngControl="mess_subject" type="text"></ion-input>
     </ion-item>
-    <ion-item>
-        <ion-label fixed>Message</ion-label>
-        <ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
-    </ion-item>
+    <!--<ion-item>-->
+        <!--<ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>-->
+
+    <!--</ion-item>-->
+    <div>
+        <p-editor [style]="{'height':'320px'}">
+            <header>
+                    <span class="ql-format-group">
+                        <span title="Bold" class="ql-format-button ql-bold"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Italic" class="ql-format-button ql-italic"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Underline" class="ql-format-button ql-underline"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Strikethrough" class="ql-format-button ql-strike"></span>
+                    </span>
+            </header>
+        </p-editor>
+    </div>
     <div padding>
         <button (click)="onSend(responseData,startDate,timepickerStart,timepickerEnd)" type="submit" primary block>Send</button>
         <button (click)="onUpdate(responseData,startDate,timepickerStart,timepickerEnd)" type="submit" primary block>Update</button>

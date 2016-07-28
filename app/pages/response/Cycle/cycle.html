@@ -54,11 +54,25 @@
         </ion-card-content>
     </ion-card>
 
-
-    <ion-item>
-        <ion-label fixed dark>Message</ion-label>
-        <ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>
-    </ion-item>
+    <div>
+        <p-editor [style]="{'height':'320px'}">
+        <header>
+                    <span class="ql-format-group">
+                        <span title="Bold" class="ql-format-button ql-bold"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Italic" class="ql-format-button ql-italic"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Underline" class="ql-format-button ql-underline"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Strikethrough" class="ql-format-button ql-strike"></span>
+                    </span>
+        </header>
+        </p-editor>
+    </div>
+    <!--<ion-item>-->
+        <!--<ion-label fixed dark>Message</ion-label>-->
+        <!--<ion-input [(ngModel)]="responseData.email_message" ngControl="email_message" type="text"></ion-input>-->
+    <!--</ion-item>-->
     <div padding>
         <button [hidden]="duration" (click)="onSend()" type="submit" primary block>Send</button>
         <button [hidden]="duration" (click)="onUpdate()" type="submit" primary block>Update</button>
