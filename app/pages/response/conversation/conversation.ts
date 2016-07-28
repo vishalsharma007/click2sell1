@@ -47,7 +47,9 @@ export class conversation{
             subTitle: 'Error !!',
             buttons: ['OK']
         });
-        this.confData.sendResponseData(data,'','','','').then(response =>{
+        let email_message = document.getElementById('ieditor').innerHTML;
+        console.log(email_message)
+        this.confData.sendResponseData(data,'','','','',email_message).then(response =>{
             this.hideLoader();
             console.log(response['status']);
             let status = response['status'];
@@ -70,7 +72,9 @@ export class conversation{
             subTitle: 'Error !!',
             buttons: ['OK']
         });
-        this.confData.sendResponseData(data,'','','','update').then(response =>{
+        let email_message = document.getElementById('ieditor').innerHTML;
+        console.log(email_message)
+        this.confData.sendResponseData(data,'','','','update',email_message).then(response =>{
             this.hideLoader();
             console.log(response['status']);
             let status = response['status'];

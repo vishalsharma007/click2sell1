@@ -56,7 +56,9 @@ export class Meeting{
         let endTime = timepickerEnd.split('T')[1];
 
         console.log(timepickerEnd.split('T')[1]);
-        this.confData.sendResponseData(data,startDate,startTime,endTime,'').then(response =>{
+        let email_message = document.getElementById('ieditor').innerHTML;
+        console.log(email_message)
+        this.confData.sendResponseData(data,startDate,startTime,endTime,'',email_message).then(response =>{
             this.hideLoader();
             console.log(response['status']);
             let status = response['status'];
@@ -82,7 +84,9 @@ export class Meeting{
             subTitle: 'Error !!',
             buttons: ['OK']
         });
-        this.confData.sendResponseData(data,startDate,startTime,endTime,'update').then(response =>{
+        let email_message = document.getElementById('ieditor').innerHTML;
+        console.log(email_message)
+        this.confData.sendResponseData(data,startDate,startTime,endTime,'update',email_message).then(response =>{
             this.hideLoader();
             console.log(response['status']);
             let status = response['status'];

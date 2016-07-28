@@ -411,7 +411,7 @@ export class UserData {
         })
     }
 
-    sendResponseData(form,startDate,timepickerStart,timepickerEnd,bt_nm){
+    sendResponseData(form,startDate,timepickerStart,timepickerEnd,bt_nm,email_message){
 
 
         console.log('inside request::: ',form);
@@ -440,7 +440,7 @@ export class UserData {
             params.set('timepicker_end', timepickerEnd);
             params.set('location', form.location);
             params.set('mess_subject', form.mess_subject);
-            params.set('email_message', form.email_message);
+            params.set('email_message', email_message);
             params.set('other_reason', form.action_name == 'other' ? form.other_reason : '');
             params.set('check_sch_follow_1', form.check_sch_follow_1);
             params.set('signature_for_email', form.signature_for_email);

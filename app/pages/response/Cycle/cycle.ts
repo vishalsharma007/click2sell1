@@ -53,8 +53,10 @@ export class cycle{
             subTitle: 'Server Error.. !!',
             buttons: ['OK']
         });
+        let email_message = document.getElementById('ieditor').innerHTML;
+        console.log(email_message)
         data.action_name = data.response;
-        this.confData.sendResponseData(data,'','','','').then(response =>{
+        this.confData.sendResponseData(data,'','','','',email_message).then(response =>{
             console.log("---------response-----------");
             console.log(response);
 

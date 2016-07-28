@@ -47,7 +47,8 @@ export class follow{
         });
         console.log(data.date_follow);
         if(data.date_follow){
-            this.confData.sendResponseData(data,'','','','').then(response =>{
+
+            this.confData.sendResponseData(data,'','','','',data.email_message).then(response =>{
                 console.log(response['status']);
                 let status = response['status'];
                 if(status == '200'){
